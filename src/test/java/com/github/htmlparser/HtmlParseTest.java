@@ -23,12 +23,17 @@ import java.io.InputStream;
 import java.text.ParseException;
 import java.util.stream.Stream;
 
+import org.apache.jackrabbit.commons.xml.DefaultContentHandler;
 import org.junit.Before;
 import org.junit.Test;
+import org.xml.sax.Attributes;
+import org.xml.sax.SAXException;
+import org.xml.sax.ext.DefaultHandler2;
 
 import com.github.htmlparser.Html;
 import com.github.htmlparser.api.Element;
 import com.github.htmlparser.api.ElementType;
+import com.github.htmlparser.util.HtmlSAXSupport;
 import com.github.htmlparser.util.HtmlStreams;
 
 public class HtmlParseTest {
@@ -57,4 +62,18 @@ public class HtmlParseTest {
     public void docParseAllTestToString() throws Exception {
         stream.map(HtmlStreams.TO_HTML).forEach(System.out::print);
     }
+    
+    @Test
+    public void docParseSAXTest() {
+        HtmlSAXSupport support = new HtmlSAXSupport(new DefaultHandler2() {
+            @Override
+            public void startElement(String uri, String localName, String qName, Attributes attributes)
+                    throws SAXException {
+                System.out.println(localName);
+            }
+
+        },new DefaultHandler2());
+        stream.forEach(support);
+    }
+    
 }

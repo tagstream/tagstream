@@ -31,8 +31,12 @@ public class HtmlSAXSupport implements Consumer<Element> {
     private boolean initialized;
 
     public HtmlSAXSupport(ContentHandler ch, final LexicalHandler lh) {
-        contentHandler = ch;
-        lexicalHandler = lh;
+        if (ch != null) {
+            contentHandler = ch;
+        }
+        if (lh != null ) {
+            lexicalHandler = lh;
+        }
     }
 
     @Override

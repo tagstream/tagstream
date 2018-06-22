@@ -66,5 +66,8 @@ public interface Element {
     default String getAttributeValue(String name) {
         return null;
     }
+    
+    default void setAttribute(String name, String value) {
+    }
 
 }
