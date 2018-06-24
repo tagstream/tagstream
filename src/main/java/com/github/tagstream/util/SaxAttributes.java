@@ -11,11 +11,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.github.tagstream.util;
 
-package com.github.htmlparser.api;
+import java.util.List;
 
-public interface Visitor<T> {
+import org.xml.sax.Attributes;
+import org.xml.sax.ext.Attributes2Impl;
 
-    T visit(Element element);
+import com.github.tagstream.api.impl.HtmlAttribute;
+
+public class SaxAttributes {
+    
+    public static Attributes convert(List<HtmlAttribute> attributes) {
+        Attributes2Impl response = new Attributes2Impl();
+        attributes.forEach(attr ->{
+            response.addAttribute("", "", attr.getName(), "xsi:String", attr.getValue());
+        });
+        return response;
+    }
 
 }

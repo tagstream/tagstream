@@ -11,26 +11,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.htmlparser.api.impl;
 
-import com.github.htmlparser.api.Element;
-import com.github.htmlparser.api.ElementType;
+package com.github.tagstream.api;
 
-public class Comment implements Element {
+public interface Visitor<T> {
 
-    private String value;
-
-    public Comment(String text) {
-        this.value = text;
-    }
-
-    @Override
-    public ElementType getType() {
-        return ElementType.COMMENT;
-    }
-    
-    public String toString() {
-        return value;
-    }
+    T visit(Element element);
 
 }

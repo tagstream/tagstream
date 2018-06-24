@@ -11,9 +11,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.htmlparser.api.impl;
+package com.github.tagstream.api.impl;
 
-import com.github.htmlparser.api.ElementAttribute;
+import com.github.tagstream.api.ElementAttribute;
 
 public class HtmlAttribute implements ElementAttribute {
 

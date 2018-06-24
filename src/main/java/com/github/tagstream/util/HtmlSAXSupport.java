@@ -11,7 +11,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.htmlparser.util;
+package com.github.tagstream.util;
 
 import java.util.function.Consumer;
 
@@ -20,7 +20,7 @@ import org.xml.sax.SAXException;
 import org.xml.sax.ext.DefaultHandler2;
 import org.xml.sax.ext.LexicalHandler;
 
-import com.github.htmlparser.api.Element;
+import com.github.tagstream.api.Element;
 
 public class HtmlSAXSupport implements Consumer<Element> {
     

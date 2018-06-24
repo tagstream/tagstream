@@ -15,7 +15,7 @@
 		<version>32</version>
 	</parent>
 
-	<artifactId>html-parser</artifactId>
+	<artifactId>tag-stream</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>bundle</packaging>
 
@@ -75,7 +75,7 @@
 			<version>1.4</version>
 		</dependency>
 	</dependencies>
-	<groupId>com.github.html-parser</groupId>
+	<groupId>com.github.tagstream</groupId>
 	<name>HTML5 Parser and Stream Support</name>
 	<description>Provides utilities to parse and pull HTML5 content or use as a Stream</description>
 </project>

@@ -11,13 +11,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.htmlparser.util;
+package com.github.tagstream.util;
 
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import com.github.htmlparser.api.Element;
-import com.github.htmlparser.api.impl.HtmlElement;
+import com.github.tagstream.api.Element;
+import com.github.tagstream.api.impl.HtmlElement;
 
 public class HtmlStreams {
     

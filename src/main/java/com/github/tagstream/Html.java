@@ -11,7 +11,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.htmlparser;
+package com.github.tagstream;
 
 import java.io.InputStream;
 import java.util.Spliterator;
@@ -19,7 +19,7 @@ import java.util.Spliterators;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
-import com.github.htmlparser.api.Element;
+import com.github.tagstream.api.Element;
 
 public class Html {
     

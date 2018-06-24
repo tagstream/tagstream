@@ -11,13 +11,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.htmlparser.api;
+package com.github.tagstream.api;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-import com.github.htmlparser.api.impl.HtmlAttribute;
+import com.github.tagstream.api.impl.HtmlAttribute;
 
 public interface Element {
 

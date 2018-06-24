@@ -26,9 +26,9 @@ import java.util.stream.Stream;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.github.htmlparser.Html;
-import com.github.htmlparser.api.Element;
-import com.github.htmlparser.api.ElementType;
+import com.github.tagstream.Html;
+import com.github.tagstream.api.Element;
+import com.github.tagstream.api.ElementType;
 
 public class UnusualHtmlTest {
 

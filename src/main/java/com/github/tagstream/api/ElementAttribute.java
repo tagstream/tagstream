@@ -11,25 +11,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.htmlparser.api.impl;
+package com.github.tagstream.api;
 
-import com.github.htmlparser.api.Element;
-import com.github.htmlparser.api.ElementType;
+public interface ElementAttribute {
 
-public class EndTag implements Element {
+    String getName();
 
-    private String tagName;
+    public String getValue();
 
-    public EndTag(String t) {
-        tagName = t;
-    }
+    void setValue(String value);
 
-    public String toString() {
-        return tagName;
-    }
+    boolean isQuoted();
 
-    @Override
-    public ElementType getType() {
-        return ElementType.END_TAG;
-    }
+    String getQuoted();
+
 }

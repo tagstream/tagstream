@@ -19,10 +19,10 @@ options {
 } 
 
 PARSER_BEGIN(HtmlParser)
-package com.github.htmlparser.impl;
+package com.github.tagstream.impl;
 
-import com.github.htmlparser.api.*;
-import com.github.htmlparser.api.impl.*;
+import com.github.tagstream.api.*;
+import com.github.tagstream.api.impl.*;
 import java.util.*;
 
 public class HtmlParser {

@@ -30,11 +30,11 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.ext.DefaultHandler2;
 
-import com.github.htmlparser.Html;
-import com.github.htmlparser.api.Element;
-import com.github.htmlparser.api.ElementType;
-import com.github.htmlparser.util.HtmlSAXSupport;
-import com.github.htmlparser.util.HtmlStreams;
+import com.github.tagstream.Html;
+import com.github.tagstream.api.Element;
+import com.github.tagstream.api.ElementType;
+import com.github.tagstream.util.HtmlSAXSupport;
+import com.github.tagstream.util.HtmlStreams;
 
 public class HtmlParseTest {
 

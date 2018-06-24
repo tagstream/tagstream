@@ -11,13 +11,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.htmlparser.api.impl;
+package com.github.tagstream.api.impl;
 /**
  * Plain text
  */
 
-import com.github.htmlparser.api.Element;
-import com.github.htmlparser.api.ElementType;
+import com.github.tagstream.api.Element;
+import com.github.tagstream.api.ElementType;
 
 public class HtmlText implements Element {
 

@@ -11,18 +11,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.htmlparser.api;
+package com.github.tagstream.api.impl;
 
-public interface ElementAttribute {
+import com.github.tagstream.api.Element;
+import com.github.tagstream.api.ElementType;
 
-    String getName();
+public class Comment implements Element {
 
-    public String getValue();
+    private String value;
 
-    void setValue(String value);
+    public Comment(String text) {
+        this.value = text;
+    }
 
-    boolean isQuoted();
-
-    String getQuoted();
+    @Override
+    public ElementType getType() {
+        return ElementType.COMMENT;
+    }
+    
+    public String toString() {
+        return value;
+    }
 
 }

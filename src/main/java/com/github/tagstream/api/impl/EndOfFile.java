@@ -11,14 +11,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.htmlparser.api.impl; 
+package com.github.tagstream.api.impl;
 
-import java.util.List;
+import com.github.tagstream.api.Element;
+import com.github.tagstream.api.ElementType;
 
-public class DoctTypeElement extends HtmlElement {
+public class EndOfFile implements Element {
 
-    public DoctTypeElement(String tag, List<HtmlAttribute> attrList) {
-        super(tag, attrList);
+    @Override
+    public ElementType getType() {
+        return ElementType.EOF;
     }
 
 }

@@ -11,23 +11,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.htmlparser.util;
+package com.github.tagstream.api.impl; 
 
 import java.util.List;
 
-import org.xml.sax.Attributes;
-import org.xml.sax.ext.Attributes2Impl;
+public class DoctTypeElement extends HtmlElement {
 
-import com.github.htmlparser.api.impl.HtmlAttribute;
-
-public class SaxAttributes {
-    
-    public static Attributes convert(List<HtmlAttribute> attributes) {
-        Attributes2Impl response = new Attributes2Impl();
-        attributes.forEach(attr ->{
-            response.addAttribute("", "", attr.getName(), "xsi:String", attr.getValue());
-        });
-        return response;
+    public DoctTypeElement(String tag, List<HtmlAttribute> attrList) {
+        super(tag, attrList);
     }
 
 }

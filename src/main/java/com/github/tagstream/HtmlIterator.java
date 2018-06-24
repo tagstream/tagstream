@@ -11,16 +11,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.htmlparser;
+package com.github.tagstream;
 
 import java.io.InputStream;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-import com.github.htmlparser.api.Element;
-import com.github.htmlparser.api.ElementType;
-import com.github.htmlparser.impl.HtmlParser;
-import com.github.htmlparser.impl.ParseException;
+import com.github.tagstream.api.Element;
+import com.github.tagstream.api.ElementType;
+import com.github.tagstream.impl.HtmlParser;
+import com.github.tagstream.impl.ParseException;
 
 public class HtmlIterator implements Iterator<Element> {
 

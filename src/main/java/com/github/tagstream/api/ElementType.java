@@ -11,16 +11,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.htmlparser.api.impl;
+package com.github.tagstream.api;
 
-import com.github.htmlparser.api.Element;
-import com.github.htmlparser.api.ElementType;
-
-public class EndOfFile implements Element {
-
-    @Override
-    public ElementType getType() {
-        return ElementType.EOF;
-    }
-
+public enum ElementType {
+    EOF, TAG, COMMENT, END_TAG, TEXT, DECLARATION;
 }
