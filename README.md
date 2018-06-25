@@ -40,8 +40,11 @@ Here is a section of example HTML5 taken from the specification.
 <tr> <td>Headlights                            <td>✔                <td>✔
 <tr> <td>Interior Lights                       <td>✔                <td>✔
 <tr> <td>Electric locomotive operating sounds  <td>✔                <td>✔
-<tr> <td>Engineer’s cab lighting               <td>      <td>✔
-<tr> <td>Station Announcements - Swiss         <td>      <td>✔
+<tr> <td>Engineer’s cab lighting               <td>        <td>✔
+<tr> <td>Station Announcements - Swiss         <td>        <td>✔
 </table>
 ```
 
+Notice the lack of ending tags in this valid HTML. In a traditional parser, you would spend time building the dom tree rather than getting to the data you want.
+
+This doesn't mean that you can't use TagStream to validate HTML. If you do need to validate content you can do that on the fly.
