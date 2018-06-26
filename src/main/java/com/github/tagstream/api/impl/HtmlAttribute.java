@@ -14,6 +14,7 @@
 package com.github.tagstream.api.impl;
 
 import com.github.tagstream.api.ElementAttribute;
+import com.github.tagstream.util.HtmlEntityTranslator;
 
 public class HtmlAttribute implements ElementAttribute {
 
@@ -21,6 +22,7 @@ public class HtmlAttribute implements ElementAttribute {
     private String value;
     private boolean isQuoted;
     private char quotes;
+    private boolean normalized;
 
     public HtmlAttribute(String n) {
         setName(n);
@@ -32,7 +34,6 @@ public class HtmlAttribute implements ElementAttribute {
             setValue(value);
         }
     }
-    
 
     public String getName() {
         return name;
@@ -41,9 +42,10 @@ public class HtmlAttribute implements ElementAttribute {
     public void setName(String name) {
         this.name = name;
     }
-    
+
     /**
-     * @param value the value to set, may be null
+     * @param value
+     *            the value to set, may be null
      */
     public void setValue(String value) {
         this.value = value;
@@ -52,40 +54,51 @@ public class HtmlAttribute implements ElementAttribute {
             dequotValue();
         }
     }
-    
-    public String getValue() { 
+
+    public String getValue() {
+        if (normalized) {
+            return value;
+        }
+        normalize();
         return value;
     }
-    
+
+    private boolean normalize() {
+        if (value.contains("&")) {
+            value = HtmlEntityTranslator.decodeHTML(value);
+        }
+        normalized = true;
+        return true;
+    }
 
     public boolean isValueAssigned() {
         return value != null;
     }
-    
+
     private void setQuoted() {
         if (!isValueAssigned()) {
             return;
         }
         char first = value.charAt(0);
-        isQuoted = (first == '\'' || first =='"') && value.charAt(value.length() - 1) == first;
+        isQuoted = (first == '\'' || first == '"') && value.charAt(value.length() - 1) == first;
         if (isQuoted) {
             quotes = first;
         }
     }
+
     private void dequotValue() {
         value = value.substring(1, value.length() - 1);
     }
-    
+
     public boolean isQuoted() {
         return isQuoted;
     }
-    
+
     public String getQuoted() {
         if (isQuoted) {
             return quotes + value + quotes;
         }
         return value;
     }
-    
 
 }

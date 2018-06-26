@@ -20,12 +20,12 @@ import java.util.Optional;
 import com.github.tagstream.api.Element;
 import com.github.tagstream.api.ElementType;
 
-public class HtmlElement implements Element {
+public class StartTag implements Element {
 
     private String tagName;
     private List<HtmlAttribute> attributes = Collections.emptyList();
 
-    public HtmlElement(String tag, List<HtmlAttribute> attrList) {
+    public StartTag(String tag, List<HtmlAttribute> attrList) {
         tagName = tag;
         attributes = attrList;
     }

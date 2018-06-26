@@ -15,9 +15,9 @@ package com.github.tagstream.api.impl;
 
 import java.util.List;
 
-public class DoctTypeElement extends HtmlElement {
+public class DocType extends StartTag {
 
-    public DoctTypeElement(String tag, List<HtmlAttribute> attrList) {
+    public DocType(String tag, List<HtmlAttribute> attrList) {
         super(tag, attrList);
     }
 

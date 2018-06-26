@@ -17,7 +17,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import com.github.tagstream.api.Element;
-import com.github.tagstream.api.impl.HtmlElement;
+import com.github.tagstream.api.impl.StartTag;
 
 public class HtmlStreams {
     
@@ -47,7 +47,7 @@ public class HtmlStreams {
         case TAG:
             sb.append('<');
             sb.append(element.toString());
-            HtmlElement tag = (HtmlElement) element;
+            StartTag tag = (StartTag) element;
             if (tag.hasAttributes()) {
                 sb.append(' ');
                 sb.append(tag.getAttributes().stream().map(a -> {

@@ -121,7 +121,7 @@ public class HtmlParser implements HtmlParserConstants {
       t = jj_consume_token(TAG_NAME);
       alist = attributeList();
       et = jj_consume_token(END_OF_TAG);
-      {if (true) return new HtmlElement(t.image, alist);}
+      {if (true) return new StartTag(t.image, alist);}
     } catch (ParseException ex) {
     token_source.SwitchTo(DEFAULT);
     String s = getTokenHtmlText(firstToken, getNextToken());
@@ -201,7 +201,7 @@ public class HtmlParser implements HtmlParserConstants {
                                                  alist.add(new HtmlAttribute(token.image));
       }
       jj_consume_token(DECL_END);
-      {if (true) return new HtmlElement(tok.image, alist);}
+      {if (true) return new StartTag(tok.image, alist);}
     } catch (ParseException ex) {
     token_source.SwitchTo(DEFAULT);
     String s = getTokenHtmlText(firstToken, getNextToken());
