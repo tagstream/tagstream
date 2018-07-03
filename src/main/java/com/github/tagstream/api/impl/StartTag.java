@@ -75,6 +75,6 @@ public class StartTag implements Element {
 
     @Override
     public ElementType getType() {
-        return ElementType.TAG;
+        return ElementType.START_TAG;
     }
 }

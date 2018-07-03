@@ -22,18 +22,18 @@ import com.github.tagstream.api.ElementType;
 import com.github.tagstream.impl.HtmlParser;
 import com.github.tagstream.impl.ParseException;
 
-public class HtmlIterator implements Iterator<Element> {
+public class TagIterator implements Iterator<Element> {
 
     Element current;
 
     boolean eof = false;
     private HtmlParser parser;
 
-    public HtmlIterator(InputStream is) {
+    public TagIterator(InputStream is) {
         parser = new HtmlParser(is);
     }
 
-    public HtmlIterator(InputStream is, String encoding) {
+    public TagIterator(InputStream is, String encoding) {
         parser = new HtmlParser(is, encoding);
     }
 

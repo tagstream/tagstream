@@ -30,7 +30,7 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.ext.DefaultHandler2;
 
-import com.github.tagstream.Html;
+import com.github.tagstream.Tag;
 import com.github.tagstream.api.Element;
 import com.github.tagstream.api.ElementType;
 import com.github.tagstream.util.HtmlSAXSupport;
@@ -43,12 +43,12 @@ public class HtmlParseTest {
     @Before
     public void setUp() throws ParseException, Exception {
         InputStream is = this.getClass().getResourceAsStream("/demo.html");
-        stream = Html.stream(is, "UTF-8");
+        stream = Tag.stream(is, "UTF-8");
     }
     
     @Test
     public void docParseTagTest() throws Exception {
-        long count = stream.filter(elem -> elem.getType() == ElementType.TAG ).count();
+        long count = stream.filter(elem -> elem.getType() == ElementType.START_TAG ).count();
         assertEquals(902, count);
     }
 

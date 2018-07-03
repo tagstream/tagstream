@@ -26,7 +26,7 @@ import java.util.stream.Stream;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.github.tagstream.Html;
+import com.github.tagstream.Tag;
 import com.github.tagstream.api.Element;
 import com.github.tagstream.api.ElementType;
 
@@ -37,7 +37,7 @@ public class UnusualHtmlTest {
     @Before
     public void setUp() throws ParseException, Exception {
         InputStream is = this.getClass().getResourceAsStream("/fail.html");
-        stream = Html.stream(is, "UTF-8");
+        stream = Tag.stream(is, "UTF-8");
     }
     
     @Test

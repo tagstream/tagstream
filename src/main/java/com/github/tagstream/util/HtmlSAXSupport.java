@@ -60,7 +60,7 @@ public class HtmlSAXSupport implements Consumer<Element> {
             case EOF:
                 contentHandler.endDocument();
                 break;
-            case TAG:
+            case START_TAG:
                 lexicalHandler.startEntity(value);
                 contentHandler.startElement("", value, value, SaxAttributes.convert(element.getAttributes()));
                 break;

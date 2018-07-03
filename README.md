@@ -2,18 +2,20 @@
 Module to provide a fast, HTML/XML parser with lazy validation.
 
 ## Using the TagStream Library
+There are two classes which provides access to the processing of an HTML/XML source. 
 
-There are a number of ways to start processing of an HTML/XML source. 
+### Using TagIterator
+The TagIterator allows you to iterate the HTML/XML document in a pull style.
 
-### Using the TagIterator
-
+### Using Tag object
+The Tag class wraps the TagIterator to provide a Stream based capability.
 
 
 Examples:
 
 ```java
 //count the number of tags
-stream.filter(elem -> elem.getType() == ElementType.TAG ).count();
+stream.filter(elem -> elem.getType() == ElementType.START_TAG ).count();
 ```
 
 ```java

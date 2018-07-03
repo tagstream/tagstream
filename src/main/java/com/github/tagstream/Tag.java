@@ -21,20 +21,20 @@ import java.util.stream.StreamSupport;
 
 import com.github.tagstream.api.Element;
 
-public class Html {
+public class Tag {
     
-    private Html() {
+    private Tag() {
     }
     
     public static Stream<Element> stream(InputStream is){
-        return stream(new HtmlIterator(is));
+        return stream(new TagIterator(is));
     }
     
     public static Stream<Element> stream(InputStream is, String encoding ) {
-        return stream(new HtmlIterator(is, encoding));
+        return stream(new TagIterator(is, encoding));
     }
     
-    private static Stream<Element> stream(HtmlIterator iterator){
+    private static Stream<Element> stream(TagIterator iterator){
         return StreamSupport.stream(Spliterators.spliteratorUnknownSize(iterator, Spliterator.ORDERED | Spliterator.IMMUTABLE), false);
     }
 

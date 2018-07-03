@@ -44,7 +44,7 @@ public class HtmlStreams {
             break;
         case EOF:
             break;
-        case TAG:
+        case START_TAG:
             sb.append('<');
             sb.append(element.toString());
             StartTag tag = (StartTag) element;

@@ -14,5 +14,5 @@
 package com.github.tagstream.api;
 
 public enum ElementType {
-    EOF, TAG, COMMENT, END_TAG, TEXT, DECLARATION;
+    EOF, START_TAG, COMMENT, END_TAG, TEXT, DECLARATION;
 }
