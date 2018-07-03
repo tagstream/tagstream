@@ -16,7 +16,7 @@ package com.github.tagstream.api.impl;
 import com.github.tagstream.api.ElementAttribute;
 import com.github.tagstream.util.HtmlEntityTranslator;
 
-public class HtmlAttribute implements ElementAttribute {
+public class TagAttribute implements ElementAttribute {
 
     private String name;
     private String value;
@@ -24,11 +24,11 @@ public class HtmlAttribute implements ElementAttribute {
     private char quotes;
     private boolean normalized;
 
-    public HtmlAttribute(String n) {
+    public TagAttribute(String n) {
         setName(n);
     }
 
-    public HtmlAttribute(String name, String value) {
+    public TagAttribute(String name, String value) {
         setName(name);
         if (value != null) {
             setValue(value);

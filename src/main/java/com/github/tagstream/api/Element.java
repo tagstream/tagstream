@@ -17,7 +17,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-import com.github.tagstream.api.impl.HtmlAttribute;
+import com.github.tagstream.api.impl.TagAttribute;
 
 public interface Element {
 
@@ -47,11 +47,11 @@ public interface Element {
         return false;
     }
 
-    default List<HtmlAttribute> getAttributes() {
+    default List<TagAttribute> getAttributes() {
         return Collections.emptyList();
     }
 
-    default Optional<HtmlAttribute> getAttribute(String attrName) {
+    default Optional<TagAttribute> getAttribute(String attrName) {
         return Optional.empty();
     }
 

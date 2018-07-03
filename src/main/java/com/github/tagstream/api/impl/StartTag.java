@@ -23,9 +23,9 @@ import com.github.tagstream.api.ElementType;
 public class StartTag implements Element {
 
     private String tagName;
-    private List<HtmlAttribute> attributes = Collections.emptyList();
+    private List<TagAttribute> attributes = Collections.emptyList();
 
-    public StartTag(String tag, List<HtmlAttribute> attrList) {
+    public StartTag(String tag, List<TagAttribute> attrList) {
         tagName = tag;
         attributes = attrList;
     }
@@ -35,7 +35,7 @@ public class StartTag implements Element {
         return !attributes.isEmpty();
     }
 
-    public void addAttribute(HtmlAttribute attribute) {
+    public void addAttribute(TagAttribute attribute) {
         attributes.add(attribute);
     }
 
@@ -51,7 +51,7 @@ public class StartTag implements Element {
 
     @Override
     public String getAttributeValue(String name) {
-        Optional<HtmlAttribute> attribute = attributes.stream()
+        Optional<TagAttribute> attribute = attributes.stream()
                 .filter(attr -> attr.getName().equalsIgnoreCase(name) && attr.isValueAssigned()).findFirst();
         if (attribute.isPresent()) {
             return attribute.get().getValue();
@@ -60,12 +60,12 @@ public class StartTag implements Element {
     }
 
     @Override
-    public List<HtmlAttribute> getAttributes() {
+    public List<TagAttribute> getAttributes() {
         return attributes;
     }
 
     @Override
-    public Optional<HtmlAttribute> getAttribute(String attrName) {
+    public Optional<TagAttribute> getAttribute(String attrName) {
         return attributes.stream().filter(attr -> attr.getName().equals(attrName)).findFirst();
     }
 

@@ -18,11 +18,11 @@ import java.util.List;
 import org.xml.sax.Attributes;
 import org.xml.sax.ext.Attributes2Impl;
 
-import com.github.tagstream.api.impl.HtmlAttribute;
+import com.github.tagstream.api.impl.TagAttribute;
 
 public class SaxAttributes {
     
-    public static Attributes convert(List<HtmlAttribute> attributes) {
+    public static Attributes convert(List<TagAttribute> attributes) {
         Attributes2Impl response = new Attributes2Impl();
         attributes.forEach(attr ->{
             response.addAttribute("", "", attr.getName(), "xsi:String", attr.getValue());

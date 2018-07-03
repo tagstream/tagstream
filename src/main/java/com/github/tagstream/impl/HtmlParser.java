@@ -50,12 +50,12 @@ public class HtmlParser implements HtmlParserConstants {
         if (jj_2_2(2)) {
           jj_consume_token(TAG_START);
           text = jj_consume_token(LST_ERROR);
-              {if (true) return new HtmlText("<" + text.image);}
+              {if (true) return new TagText("<" + text.image);}
         } else {
           switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
           case RAWTEXT:
             text = jj_consume_token(RAWTEXT);
-                             {if (true) return new HtmlText(text.image);}
+                             {if (true) return new TagText(text.image);}
             break;
           case 0:
             jj_consume_token(0);
@@ -73,7 +73,7 @@ public class HtmlParser implements HtmlParserConstants {
   }
 
 /** @return an attribute */
-  final public HtmlAttribute attribute() throws ParseException {
+  final public TagAttribute attribute() throws ParseException {
   Token t1, t2=null;
     t1 = jj_consume_token(ATTR_NAME);
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -86,15 +86,15 @@ public class HtmlParser implements HtmlParserConstants {
       ;
     }
     if (t2 == null)
-      {if (true) return new HtmlAttribute(t1.image);}
+      {if (true) return new TagAttribute(t1.image);}
     else
-      {if (true) return new HtmlAttribute(t1.image, t2.image);}
+      {if (true) return new TagAttribute(t1.image, t2.image);}
     throw new Error("Missing return statement in function");
   }
 
-  final public List<HtmlAttribute> attributeList() throws ParseException {
-  List<HtmlAttribute> alist = new ArrayList<HtmlAttribute>();
-  HtmlAttribute a;
+  final public List<TagAttribute> attributeList() throws ParseException {
+  List<TagAttribute> alist = new ArrayList<TagAttribute>();
+  TagAttribute a;
     label_1:
     while (true) {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -114,7 +114,7 @@ public class HtmlParser implements HtmlParserConstants {
 
   final public Element tag() throws ParseException {
   Token t, et;
-  List<HtmlAttribute> alist;
+  List<TagAttribute> alist;
   Token firstToken = getToken(1);
     try {
       jj_consume_token(TAG_START);
@@ -125,7 +125,7 @@ public class HtmlParser implements HtmlParserConstants {
     } catch (ParseException ex) {
     token_source.SwitchTo(DEFAULT);
     String s = getTokenHtmlText(firstToken, getNextToken());
-    {if (true) return new HtmlText(s);}
+    {if (true) return new TagText(s);}
     }
     throw new Error("Missing return statement in function");
   }
@@ -142,7 +142,7 @@ public class HtmlParser implements HtmlParserConstants {
     } catch (ParseException ex) {
     token_source.SwitchTo(DEFAULT);
     String s = getTokenHtmlText(firstToken, getNextToken());
-    {if (true) return new HtmlText(s);}
+    {if (true) return new TagText(s);}
     }
     throw new Error("Missing return statement in function");
   }
@@ -182,7 +182,7 @@ public class HtmlParser implements HtmlParserConstants {
 /** @return the start of a DECLARATION */
   final public Element decltag() throws ParseException {
   Token tok = null;
-  List<HtmlAttribute> alist = new ArrayList<HtmlAttribute>();
+  List<TagAttribute> alist = new ArrayList<TagAttribute>();
   Token firstToken = getToken(1);
     try {
       jj_consume_token(DECL_START);
@@ -198,14 +198,14 @@ public class HtmlParser implements HtmlParserConstants {
           break label_3;
         }
         jj_consume_token(DECL_ATTR);
-                                                 alist.add(new HtmlAttribute(token.image));
+                                                 alist.add(new TagAttribute(token.image));
       }
       jj_consume_token(DECL_END);
       {if (true) return new StartTag(tok.image, alist);}
     } catch (ParseException ex) {
     token_source.SwitchTo(DEFAULT);
     String s = getTokenHtmlText(firstToken, getNextToken());
-    {if (true) return new HtmlText(s);}
+    {if (true) return new TagText(s);}
     }
     throw new Error("Missing return statement in function");
   }

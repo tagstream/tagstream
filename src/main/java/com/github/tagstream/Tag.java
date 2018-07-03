@@ -21,22 +21,26 @@ import java.util.stream.StreamSupport;
 
 import com.github.tagstream.api.Element;
 
+/**
+ * Provides access to a stream of elements from a XML/HTML source
+ * 
+ */
 public class Tag {
-    
+
     private Tag() {
     }
-    
-    public static Stream<Element> stream(InputStream is){
+
+    public static Stream<Element> stream(InputStream is) {
         return stream(new TagIterator(is));
     }
-    
-    public static Stream<Element> stream(InputStream is, String encoding ) {
+
+    public static Stream<Element> stream(InputStream is, String encoding) {
         return stream(new TagIterator(is, encoding));
     }
-    
-    private static Stream<Element> stream(TagIterator iterator){
-        return StreamSupport.stream(Spliterators.spliteratorUnknownSize(iterator, Spliterator.ORDERED | Spliterator.IMMUTABLE), false);
-    }
 
+    private static Stream<Element> stream(TagIterator iterator) {
+        return StreamSupport.stream(
+                Spliterators.spliteratorUnknownSize(iterator, Spliterator.ORDERED | Spliterator.IMMUTABLE), false);
+    }
 
 }
