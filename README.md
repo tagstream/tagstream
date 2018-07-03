@@ -1,9 +1,13 @@
 # TagStream
-TagStream is an extremely fast, lazy validating, html5 supporting parser that can be used to produce
+Module to provide a fast, HTML/XML parser with lazy validation.
 
-* lazy Iterator
-* Stream<Element>
-* Managed set of processors. to manipulate content 
+## Using the TagStream Library
+
+There are a number of ways to start processing of an HTML/XML source. 
+
+### Using the TagIterator
+
+
 
 Examples:
 
