@@ -19,22 +19,22 @@ import java.util.NoSuchElementException;
 
 import com.github.tagstream.api.Element;
 import com.github.tagstream.api.ElementType;
-import com.github.tagstream.impl.HtmlParser;
+import com.github.tagstream.impl.TagParser;
 import com.github.tagstream.impl.ParseException;
 
 public class TagIterator implements Iterator<Element> {
 
-    Element current;
+    private Element current;
 
     boolean eof = false;
-    private HtmlParser parser;
+    private TagParser parser;
 
     public TagIterator(InputStream is) {
-        parser = new HtmlParser(is);
+        parser = new TagParser(is);
     }
 
     public TagIterator(InputStream is, String encoding) {
-        parser = new HtmlParser(is, encoding);
+        parser = new TagParser(is, encoding);
     }
 
     @Override

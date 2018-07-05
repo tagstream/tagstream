@@ -59,7 +59,7 @@ public class TagAttribute implements ElementAttribute {
         if (normalized) {
             return value;
         }
-        normalize();
+       //normalize();
         return value;
     }
 

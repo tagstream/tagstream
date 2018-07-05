@@ -18,14 +18,14 @@ options {
   UNICODE_INPUT = true;
 } 
 
-PARSER_BEGIN(HtmlParser)
+PARSER_BEGIN(TagParser)
 package com.github.tagstream.impl;
 
 import com.github.tagstream.api.*;
 import com.github.tagstream.api.impl.*;
 import java.util.*;
 
-public class HtmlParser {
+public class TagParser {
 
   private static String getTokenHtmlText(Token first, Token cur) {
     Token t;
@@ -46,7 +46,7 @@ public class HtmlParser {
 
 }
 
-PARSER_END(HtmlParser)
+PARSER_END(TagParser)
 
 <*> TOKEN :
 {
@@ -128,30 +128,30 @@ Element element() :
   |      e = decltag()    { return e; }
   | LOOKAHEAD(2) 
         <TAG_START> text=<LST_ERROR>
-            { return new HtmlText("<" + text.image); }
-  |   text = <RAWTEXT>     { return new HtmlText(text.image); }
+            { return new TagText("<" + text.image); }
+  |   text = <RAWTEXT>     { return new TagText(text.image); }
   |   <EOF> { return new EndOfFile(); }
 )
 }
 
 /** @return an attribute */
-HtmlAttribute attribute() : 
+TagAttribute attribute() : 
 {
   Token t1, t2=null;
 }
 {
   t1=<ATTR_NAME> [ <ATTR_EQ> t2=<ATTR_VAL> ]
   { if (t2 == null) 
-      return new HtmlAttribute(t1.image); 
+      return new TagAttribute(t1.image); 
     else
-      return new HtmlAttribute(t1.image, t2.image);
+      return new TagAttribute(t1.image, t2.image);
   }
 }
 
-List<HtmlAttribute> attributeList() : 
+List<TagAttribute> attributeList() : 
 {
-  List<HtmlAttribute> alist = new ArrayList<HtmlAttribute>();
-  HtmlAttribute a;
+  List<TagAttribute> alist = new ArrayList<TagAttribute>();
+  TagAttribute a;
 }
 {
   (a=attribute() { alist.add(a); } )*
@@ -164,19 +164,19 @@ List<HtmlAttribute> attributeList() :
 Element tag() :
 {
   Token t, et;
-  List<HtmlAttribute> alist;
+  List<TagAttribute> alist;
   Token firstToken = getToken(1);
 }
 {
   try {
     <TAG_START> t=<TAG_NAME> alist=attributeList() et=<END_OF_TAG>
     { 
-      return new HtmlElement(t.image, alist); 
+      return new StartTag(t.image, alist); 
     }
   } catch (ParseException ex) {
     token_source.SwitchTo(DEFAULT); 
     String s = getTokenHtmlText(firstToken, getNextToken());
-    return new HtmlText(s);
+    return new TagText(s);
   }
 }
 
@@ -193,7 +193,7 @@ Element endHtmlElement() :
   } catch (ParseException ex) {
     token_source.SwitchTo(DEFAULT); 
     String s = getTokenHtmlText(firstToken, getNextToken());
-    return new HtmlText(s);
+    return new TagText(s);
   }
 }
 
@@ -211,18 +211,18 @@ Comment commentHtmlElement() :
 Element decltag() :
 {
   Token tok = null;
-  List<HtmlAttribute> alist = new ArrayList<HtmlAttribute>();
+  List<TagAttribute> alist = new ArrayList<TagAttribute>();
   Token firstToken = getToken(1);
 }
 {
   try {
-    <DECL_START> tok=<DECL_TAG> (< DECL_ATTR > { alist.add(new HtmlAttribute(token.image)); })* <DECL_END>
+    <DECL_START> tok=<DECL_TAG> (< DECL_ATTR > { alist.add(new TagAttribute(token.image)); })* <DECL_END>
     {
-      return new HtmlElement(tok.image, alist); 
+      return new StartTag(tok.image, alist); 
     }
   } catch (ParseException ex) {
     token_source.SwitchTo(DEFAULT); 
     String s = getTokenHtmlText(firstToken, getNextToken());
-    return new HtmlText(s);
+    return new TagText(s);
   }
 }
