@@ -21,6 +21,7 @@ import org.xml.sax.ext.DefaultHandler2;
 import org.xml.sax.ext.LexicalHandler;
 
 import com.github.tagstream.api.Element;
+import com.github.tagstream.api.Tag;
 
 public class HtmlSAXSupport implements Consumer<Element> {
     
@@ -62,7 +63,7 @@ public class HtmlSAXSupport implements Consumer<Element> {
                 break;
             case START_TAG:
                 lexicalHandler.startEntity(value);
-                contentHandler.startElement("", value, value, SaxAttributes.convert(element.getAttributes()));
+                contentHandler.startElement("", value, value, SaxAttributes.convert(((Tag)element).getAttributes()));
                 break;
             case TEXT:
                 contentHandler.characters(value.toCharArray(), 0, value.toCharArray().length);

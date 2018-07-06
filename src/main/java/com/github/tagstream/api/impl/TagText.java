@@ -37,5 +37,12 @@ public class TagText implements Element {
         return ElementType.TEXT;
     }
    
+    public String getText() {
+        return value;
+    }
+    
+    public void setText(String text) {
+        this.value = text;
+    }
     
 }

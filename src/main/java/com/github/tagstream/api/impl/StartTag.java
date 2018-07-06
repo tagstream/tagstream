@@ -17,10 +17,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-import com.github.tagstream.api.Element;
 import com.github.tagstream.api.ElementType;
+import com.github.tagstream.api.Tag;
 
-public class StartTag implements Element {
+public class StartTag implements Tag {
 
     private String tagName;
     private List<TagAttribute> attributes = Collections.emptyList();
@@ -76,5 +76,10 @@ public class StartTag implements Element {
     @Override
     public ElementType getType() {
         return ElementType.START_TAG;
+    }
+
+    @Override
+    public String getName() {
+        return tagName;
     }
 }

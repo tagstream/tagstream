@@ -13,12 +13,6 @@
  */
 package com.github.tagstream.api;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
-
-import com.github.tagstream.api.impl.TagAttribute;
-
 public interface Element {
 
     /**
@@ -37,37 +31,5 @@ public interface Element {
      * @return the type of element
      */
     ElementType getType();
-
-    /**
-     * Whether this element supports Attributes
-     * 
-     * @return
-     */
-    default boolean hasAttributes() {
-        return false;
-    }
-
-    default List<TagAttribute> getAttributes() {
-        return Collections.emptyList();
-    }
-
-    default Optional<TagAttribute> getAttribute(String attrName) {
-        return Optional.empty();
-    }
-
-    default boolean containsAttribute(String attrName) {
-        return false;
-    }
-
-    default boolean attributeHasValue(String attrName) {
-        return false;
-    }
-
-    default String getAttributeValue(String name) {
-        return null;
-    }
-    
-    default void setAttribute(String name, String value) {
-    }
 
 }
