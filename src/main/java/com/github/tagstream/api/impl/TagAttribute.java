@@ -14,7 +14,6 @@
 package com.github.tagstream.api.impl;
 
 import com.github.tagstream.api.ElementAttribute;
-import com.github.tagstream.util.HtmlEntityTranslator;
 
 public class TagAttribute implements ElementAttribute {
 
@@ -22,7 +21,6 @@ public class TagAttribute implements ElementAttribute {
     private String value;
     private boolean isQuoted;
     private char quotes;
-    private boolean normalized;
 
     public TagAttribute(String n) {
         setName(n);
@@ -56,20 +54,9 @@ public class TagAttribute implements ElementAttribute {
     }
 
     public String getValue() {
-        if (normalized) {
-            return value;
-        }
-       //normalize();
         return value;
     }
 
-    private boolean normalize() {
-        if (value.contains("&")) {
-            value = HtmlEntityTranslator.decodeHTML(value);
-        }
-        normalized = true;
-        return true;
-    }
 
     public boolean isValueAssigned() {
         return value != null;

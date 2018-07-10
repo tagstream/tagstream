@@ -21,6 +21,9 @@ import org.apache.commons.text.translate.EntityArrays;
 
 public class Html5Entities {
     
+    private Html5Entities() {
+    }
+    
     /**
      * HTML 5.0 character entities.
      */
