@@ -128,8 +128,8 @@ Element element() :
   |      e = decltag()    { return e; }
   | LOOKAHEAD(2) 
         <TAG_START> text=<LST_ERROR>
-            { return new TagText("<" + text.image); }
-  |   text = <RAWTEXT>     { return new TagText(text.image); }
+            { return new TextData("<" + text.image); }
+  |   text = <RAWTEXT>     { return new TextData(text.image); }
   |   <EOF> { return new EndOfFile(); }
 )
 }
@@ -176,7 +176,7 @@ Element tag() :
   } catch (ParseException ex) {
     token_source.SwitchTo(DEFAULT); 
     String s = getTokenHtmlText(firstToken, getNextToken());
-    return new TagText(s);
+    return new TextData(s);
   }
 }
 
@@ -193,7 +193,7 @@ Element endHtmlElement() :
   } catch (ParseException ex) {
     token_source.SwitchTo(DEFAULT); 
     String s = getTokenHtmlText(firstToken, getNextToken());
-    return new TagText(s);
+    return new TextData(s);
   }
 }
 
@@ -223,6 +223,6 @@ Element decltag() :
   } catch (ParseException ex) {
     token_source.SwitchTo(DEFAULT); 
     String s = getTokenHtmlText(firstToken, getNextToken());
-    return new TagText(s);
+    return new TextData(s);
   }
 }

@@ -13,10 +13,42 @@
  */
 package com.github.tagstream.api;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.function.BiConsumer;
+import java.util.function.Function;
+import java.util.stream.Stream;
 
-public interface Process extends BiConsumer<Element, Process>  {
+/**
+ * 
+ * 
+ *
+ */
+public interface Process extends BiConsumer<Element,Process> {
+
+    List<Element> list = new ArrayList<>();
+
+    /**
+     * Collects all the elements that are either being passed through or created in
+     * the accept method of the consumer so that they may be passed on to the next
+     * process.
+     */
+    default void next(Element... elements) {
+        Collections.addAll(list, elements);
+    }
+
+    default Function<Element, Stream<Element>> createFlatMap(Process process) {
+        return element -> {
+            list.clear();
+            accept(element,process);
+            List<Element> test = list;
+            return list.stream();
+        };
+    }
     
-
+    public static Function<Element, Stream<Element>> chain(Process doProcess){
+        return doProcess.createFlatMap(doProcess);
+    }
 
 }

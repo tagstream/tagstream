@@ -29,10 +29,11 @@ import org.junit.Test;
 import com.github.tagstream.Tag;
 import com.github.tagstream.api.Element;
 import com.github.tagstream.api.ElementType;
+import com.github.tagstream.api.Process;
 
 public class UnusualHtmlTest {
 
-    Stream<Element> stream;
+    private Stream<Element> stream;
 
     @Before
     public void setUp() throws ParseException, Exception {
@@ -50,6 +51,16 @@ public class UnusualHtmlTest {
     public void docParseTagTest2() throws Exception {
         long count = stream.filter(elem -> elem.getType() == ElementType.TEXT ).count();
         assertEquals(7, count);
+    }
+    
+    @Test
+    public void docParseTagTest3() throws Exception {
+        long count = stream.flatMap(Process.chain((element,process) ->{
+            if (element.containsAttribute("href")) {
+                process.next(element, element);
+            }
+        })).count();
+        assertEquals(0, count);
     }
     
 }

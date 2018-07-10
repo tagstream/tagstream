@@ -22,37 +22,7 @@ import com.github.tagstream.api.impl.TagAttribute;
 public interface Tag extends Element {
     
     String getName();
-    
-    /**
-     * Whether this element supports Attributes
-     * 
-     * @return
-     */
-    default boolean hasAttributes() {
-        return false;
-    }
 
-    default List<TagAttribute> getAttributes() {
-        return Collections.emptyList();
-    }
 
-    default Optional<TagAttribute> getAttribute(String attrName) {
-        return Optional.empty();
-    }
-
-    default boolean containsAttribute(String attrName) {
-        return false;
-    }
-
-    default boolean attributeHasValue(String attrName) {
-        return false;
-    }
-
-    default String getAttributeValue(String name) {
-        return null;
-    }
-    
-    default void setAttribute(String name, String value) {
-    }
 
 }

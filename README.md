@@ -1,14 +1,14 @@
 # TagStream
-Module to provide a fast, HTML/XML parser with lazy validation.
+Module to provide a fast, HTML5/XML/XHTML tokenzier.
 
-## Using the TagStream Library
+## Using TagStream 
 There are two classes which provides access to the processing of an HTML/XML source. 
 
-### Using TagIterator
-The TagIterator allows you to iterate the HTML/XML document in a pull style.
+### TagIterator
+The TagIterator allows you to iterate the HTML/XML document utilizing a pull methodology. Whenever you need the next element you request it and it is parsed and presented.
 
-### Using Tag object
-The Tag class wraps the TagIterator to provide a Stream based capability.
+### Tag
+The Tag class wraps the TagIterator to provide a Stream<Element> provider.
 
 
 Examples:

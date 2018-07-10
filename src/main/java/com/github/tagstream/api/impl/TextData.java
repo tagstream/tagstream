@@ -19,12 +19,12 @@ package com.github.tagstream.api.impl;
 import com.github.tagstream.api.Element;
 import com.github.tagstream.api.ElementType;
 
-public class TagText implements Element {
+public class TextData implements Element {
 
     private String value;
 
     /** Constructor. */
-    public TagText(String t) {
+    public TextData(String t) {
         value = t;
     }
 

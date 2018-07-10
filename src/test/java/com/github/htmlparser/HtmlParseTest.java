@@ -23,7 +23,6 @@ import java.io.InputStream;
 import java.text.ParseException;
 import java.util.stream.Stream;
 
-import org.apache.jackrabbit.commons.xml.DefaultContentHandler;
 import org.junit.Before;
 import org.junit.Test;
 import org.xml.sax.Attributes;
@@ -33,8 +32,9 @@ import org.xml.sax.ext.DefaultHandler2;
 import com.github.tagstream.Tag;
 import com.github.tagstream.api.Element;
 import com.github.tagstream.api.ElementType;
-import com.github.tagstream.util.HtmlSAXSupport;
+import com.github.tagstream.api.Process;
 import com.github.tagstream.util.HtmlStreams;
+import com.github.tagstream.util.consumer.HtmlSAXSupport;
 
 public class HtmlParseTest {
 
@@ -74,6 +74,16 @@ public class HtmlParseTest {
 
         },new DefaultHandler2());
         stream.forEach(support);
+    }
+    @Test
+    public void docParseTagTest3() throws Exception {
+        long count = stream.flatMap(Process.chain((element,process) ->{
+            if (element.containsAttribute("href")) {
+                System.out.println(element.getAttributeValue("href"));
+                process.next(element);
+            }
+        })).count();
+        assertEquals(356, count);
     }
     
 }

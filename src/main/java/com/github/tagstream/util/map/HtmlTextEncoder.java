@@ -11,7 +11,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.tagstream.util;
+package com.github.tagstream.util.map;
 
 import java.util.LinkedList;
 import java.util.function.Function;
@@ -19,9 +19,10 @@ import java.util.stream.Stream;
 
 import com.github.tagstream.api.Element;
 import com.github.tagstream.api.Tag;
-import com.github.tagstream.api.impl.TagText;
+import com.github.tagstream.api.impl.TextData;
+import com.github.tagstream.util.HtmlEntityTranslator;
 
-public class HtmlEncoder implements Function<Element, Stream<Element>> {
+public class HtmlTextEncoder implements Function<Element, Stream<Element>> {
 
     LinkedList<String> insideOf = new LinkedList<>();
 
@@ -62,7 +63,7 @@ public class HtmlEncoder implements Function<Element, Stream<Element>> {
             break;
         case TEXT:
             if (!insideOf.isEmpty()) {
-                TagText text = (TagText)element;
+                TextData text = (TextData)element;
                 text.setText(HtmlEntityTranslator.encodeHTML(text.getText()));
             }
             break;

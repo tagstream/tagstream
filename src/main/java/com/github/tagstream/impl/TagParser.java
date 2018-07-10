@@ -49,12 +49,12 @@ public class TagParser implements TagParserConstants {
         if (jj_2_2(2)) {
           jj_consume_token(TAG_START);
           text = jj_consume_token(LST_ERROR);
-              {if (true) return new TagText("<" + text.image);}
+              {if (true) return new TextData("<" + text.image);}
         } else {
           switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
           case RAWTEXT:
             text = jj_consume_token(RAWTEXT);
-                             {if (true) return new TagText(text.image);}
+                             {if (true) return new TextData(text.image);}
             break;
           case 0:
             jj_consume_token(0);
@@ -124,7 +124,7 @@ public class TagParser implements TagParserConstants {
     } catch (ParseException ex) {
     token_source.SwitchTo(DEFAULT);
     String s = getTokenHtmlText(firstToken, getNextToken());
-    {if (true) return new TagText(s);}
+    {if (true) return new TextData(s);}
     }
     throw new Error("Missing return statement in function");
   }
@@ -141,7 +141,7 @@ public class TagParser implements TagParserConstants {
     } catch (ParseException ex) {
     token_source.SwitchTo(DEFAULT);
     String s = getTokenHtmlText(firstToken, getNextToken());
-    {if (true) return new TagText(s);}
+    {if (true) return new TextData(s);}
     }
     throw new Error("Missing return statement in function");
   }
@@ -204,7 +204,7 @@ public class TagParser implements TagParserConstants {
     } catch (ParseException ex) {
     token_source.SwitchTo(DEFAULT);
     String s = getTokenHtmlText(firstToken, getNextToken());
-    {if (true) return new TagText(s);}
+    {if (true) return new TextData(s);}
     }
     throw new Error("Missing return statement in function");
   }
