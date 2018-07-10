@@ -11,7 +11,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.tagstream.util.map;
+package com.github.tagstream.map;
 
 import java.util.LinkedList;
 import java.util.function.Function;

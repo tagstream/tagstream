@@ -33,8 +33,8 @@ import com.github.tagstream.Tag;
 import com.github.tagstream.api.Element;
 import com.github.tagstream.api.ElementType;
 import com.github.tagstream.api.Process;
+import com.github.tagstream.consumer.HtmlSAXSupport;
 import com.github.tagstream.util.HtmlStreams;
-import com.github.tagstream.util.consumer.HtmlSAXSupport;
 
 public class HtmlParseTest {
 
