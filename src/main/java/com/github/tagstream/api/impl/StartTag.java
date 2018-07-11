@@ -21,11 +21,11 @@ import com.github.tagstream.api.ElementType;
 
 public class StartTag implements Element {
 
-    private String tagName;
+    private String value;
     private Map<String, String> attributes = Collections.emptyMap();
 
-    public StartTag(String tag, Map<String, String> attrList) {
-        tagName = tag;
+    public StartTag(String value, Map<String, String> attrList) {
+        this.value = value;
         attributes = attrList;
     }
 
@@ -36,7 +36,7 @@ public class StartTag implements Element {
 
     @Override
     public String getValue() {
-        return tagName;
+        return value;
     }
 
     @Override

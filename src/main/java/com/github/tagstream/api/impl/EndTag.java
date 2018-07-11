@@ -21,14 +21,14 @@ import com.github.tagstream.api.ElementType;
 
 public class EndTag implements Element {
 
-    private String tagName;
+    private String value;
 
-    public EndTag(String t) {
-        tagName = t;
+    public EndTag(String value) {
+        this.value = value;
     }
 
     public String getValue() {
-        return tagName;
+        return value;
     }
 
     @Override

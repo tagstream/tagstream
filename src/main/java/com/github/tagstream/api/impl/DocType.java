@@ -20,11 +20,11 @@ import com.github.tagstream.api.ElementType;
 
 public class DocType implements Element {
     
-    private String name;
+    private String value;
     private Map<String,String> attributes;
 
     public DocType(String tag, Map<String,String> attrList) {
-        this.name = tag;
+        this.value = tag;
         this.attributes = attrList;
     }
     
@@ -45,7 +45,7 @@ public class DocType implements Element {
 
     @Override
     public String getValue() {
-        return name;
+        return value;
     }
 
 }

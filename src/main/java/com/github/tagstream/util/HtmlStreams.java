@@ -56,7 +56,7 @@ public class HtmlStreams {
                     String value = entry.getValue();
                     if (value != null) {
                         attr1.append('=');
-                        if (value.contains(" ")) {
+                        if (!value.matches("^[^\"\'<> =]+$")) {
                             attr1.append("'");
                             attr1.append(value);
                             attr1.append("'");

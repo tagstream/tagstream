@@ -95,11 +95,24 @@ public class HtmlParseTest {
                 if (value != null && value.startsWith("/")) {
                     element.setAttribute("href", "http://www.apache.org" + value);
                 }
-                System.out.println(element.getAttributeValue("href"));
                 process.next(element);
             }
+
         })).count();
         assertEquals(356, count);
+    }
+
+    @Test
+    public void convertLinkAndPrintTest() throws Exception {
+        stream.flatMap(Process.chain((element, process) -> {
+            if (element.containsAttribute("href")) {
+                String value = element.getAttributeValue("href");
+                if (value != null && value.startsWith("/")) {
+                    element.setAttribute("href", "http://www.apache.org" + value);
+                }
+            }
+            process.next(element);
+        })).map(HtmlStreams.TO_HTML).forEach(System.out::print);
     }
 
 }
