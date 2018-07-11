@@ -13,7 +13,7 @@
  */
 package com.github.tagstream.api.impl; 
 
-import java.util.List;
+import java.util.Map;
 
 import com.github.tagstream.api.Element;
 import com.github.tagstream.api.ElementType;
@@ -21,9 +21,9 @@ import com.github.tagstream.api.ElementType;
 public class DocType implements Element {
     
     private String name;
-    private List<TagAttribute> attributes;
+    private Map<String,String> attributes;
 
-    public DocType(String tag, List<TagAttribute> attrList) {
+    public DocType(String tag, Map<String,String> attrList) {
         this.name = tag;
         this.attributes = attrList;
     }
@@ -39,8 +39,13 @@ public class DocType implements Element {
     }
 
     @Override
-    public List<TagAttribute> getAttributes() {
+    public Map<String, String> getAttributes() {
         return attributes;
+    }
+
+    @Override
+    public String getValue() {
+        return name;
     }
 
 }

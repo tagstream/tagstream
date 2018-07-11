@@ -17,7 +17,7 @@ package com.github.tagstream.api.impl;
  */
 
 import java.util.Collections;
-import java.util.List;
+import java.util.Map;
 
 import com.github.tagstream.api.Element;
 import com.github.tagstream.api.ElementType;
@@ -44,7 +44,7 @@ public class TextData implements Element {
         return ElementType.TEXT;
     }
    
-    public String getText() {
+    public String getValue() {
         return value;
     }
     
@@ -58,8 +58,8 @@ public class TextData implements Element {
     }
 
     @Override
-    public List<TagAttribute> getAttributes() {
-        return Collections.emptyList();
+    public Map<String, String> getAttributes() {
+        return Collections.emptyMap();
     }
     
 }

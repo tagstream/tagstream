@@ -26,10 +26,10 @@ import java.util.stream.Stream;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.github.tagstream.Process;
 import com.github.tagstream.Tag;
 import com.github.tagstream.api.Element;
 import com.github.tagstream.api.ElementType;
-import com.github.tagstream.api.Process;
 
 public class UnusualHtmlTest {
 

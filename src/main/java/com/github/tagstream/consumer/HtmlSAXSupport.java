@@ -13,7 +13,7 @@
  */
 package com.github.tagstream.consumer;
 
-import java.util.List;
+import java.util.Map;
 import java.util.function.Consumer;
 
 import org.xml.sax.Attributes;
@@ -24,8 +24,6 @@ import org.xml.sax.ext.DefaultHandler2;
 import org.xml.sax.ext.LexicalHandler;
 
 import com.github.tagstream.api.Element;
-import com.github.tagstream.api.Tag;
-import com.github.tagstream.api.impl.TagAttribute;
 
 public class HtmlSAXSupport implements Consumer<Element> {
     
@@ -51,7 +49,7 @@ public class HtmlSAXSupport implements Consumer<Element> {
                 contentHandler.startDocument();
                 initialized = true;
             }
-            String value = element.toString();
+            String value = element.getValue();
             switch (element.getType()) {
             case COMMENT:
                 lexicalHandler.comment(value.toCharArray(), 0, value.length());
@@ -67,7 +65,7 @@ public class HtmlSAXSupport implements Consumer<Element> {
                 break;
             case START_TAG:
                 lexicalHandler.startEntity(value);
-                contentHandler.startElement("", value, value, HtmlSAXSupport.convert(((Tag)element).getAttributes()));
+                contentHandler.startElement("", value, value, HtmlSAXSupport.convert(element.getAttributes()));
                 break;
             case TEXT:
                 contentHandler.characters(value.toCharArray(), 0, value.toCharArray().length);
@@ -81,10 +79,10 @@ public class HtmlSAXSupport implements Consumer<Element> {
 
     }
     
-    public static Attributes convert(List<TagAttribute> attributes) {
+    public static Attributes convert(Map<String,String> attributes) {
         Attributes2Impl response = new Attributes2Impl();
-        attributes.forEach(attr ->{
-            response.addAttribute("", "", attr.getName(), "xsi:String", attr.getValue());
+        attributes.entrySet().forEach(attr ->{
+            response.addAttribute("", "", attr.getKey(), "xsi:String", attr.getValue());
         });
         return response;
     }

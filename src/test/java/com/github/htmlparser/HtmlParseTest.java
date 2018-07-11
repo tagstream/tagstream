@@ -29,10 +29,10 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.ext.DefaultHandler2;
 
+import com.github.tagstream.Process;
 import com.github.tagstream.Tag;
 import com.github.tagstream.api.Element;
 import com.github.tagstream.api.ElementType;
-import com.github.tagstream.api.Process;
 import com.github.tagstream.consumer.HtmlSAXSupport;
 import com.github.tagstream.util.HtmlStreams;
 
@@ -45,10 +45,10 @@ public class HtmlParseTest {
         InputStream is = this.getClass().getResourceAsStream("/demo.html");
         stream = Tag.stream(is, "UTF-8");
     }
-    
+
     @Test
     public void docParseTagTest() throws Exception {
-        long count = stream.filter(elem -> elem.getType() == ElementType.START_TAG ).count();
+        long count = stream.filter(elem -> elem.getType() == ElementType.START_TAG).count();
         assertEquals(902, count);
     }
 
@@ -57,12 +57,12 @@ public class HtmlParseTest {
         long count = stream.count();
         assertEquals(2928, count);
     }
-    
+
     @Test
     public void docParseAllTestToString() throws Exception {
         stream.map(HtmlStreams.TO_HTML).forEach(System.out::print);
     }
-    
+
     @Test
     public void docParseSAXTest() {
         HtmlSAXSupport support = new HtmlSAXSupport(new DefaultHandler2() {
@@ -72,12 +72,13 @@ public class HtmlParseTest {
                 System.out.println(localName);
             }
 
-        },new DefaultHandler2());
+        }, new DefaultHandler2());
         stream.forEach(support);
     }
+
     @Test
     public void docParseTagTest3() throws Exception {
-        long count = stream.flatMap(Process.chain((element,process) ->{
+        long count = stream.flatMap(Process.chain((element, process) -> {
             if (element.containsAttribute("href")) {
                 System.out.println(element.getAttributeValue("href"));
                 process.next(element);
@@ -85,5 +86,20 @@ public class HtmlParseTest {
         })).count();
         assertEquals(356, count);
     }
-    
+
+    @Test
+    public void convertLinkTest() throws Exception {
+        long count = stream.flatMap(Process.chain((element, process) -> {
+            if (element.containsAttribute("href")) {
+                String value = element.getAttributeValue("href");
+                if (value != null && value.startsWith("/")) {
+                    element.setAttribute("href", "http://www.apache.org" + value);
+                }
+                System.out.println(element.getAttributeValue("href"));
+                process.next(element);
+            }
+        })).count();
+        assertEquals(356, count);
+    }
+
 }

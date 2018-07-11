@@ -17,47 +17,51 @@ public interface TagParserConstants {
   /** RegularExpression Id. */
   int NAME_IDENTIFIER = 3;
   /** RegularExpression Id. */
-  int QUOTED_STRING = 4;
+  int SQUOTE = 4;
   /** RegularExpression Id. */
-  int TAG_END = 5;
+  int DQUOTE = 5;
   /** RegularExpression Id. */
-  int TAG_SLASHEND = 6;
+  int TAG_END = 6;
   /** RegularExpression Id. */
-  int TAG_START = 7;
+  int TAG_SLASHEND = 7;
   /** RegularExpression Id. */
-  int ENDTAG_START = 8;
+  int TAG_START = 8;
   /** RegularExpression Id. */
-  int COMMENT_START = 9;
+  int ENDTAG_START = 9;
   /** RegularExpression Id. */
-  int DECL_START = 10;
+  int COMMENT_START = 10;
   /** RegularExpression Id. */
-  int RAWTEXT = 11;
+  int DECL_START = 11;
   /** RegularExpression Id. */
-  int TAG_NAME = 12;
+  int RAWTEXT = 12;
   /** RegularExpression Id. */
-  int LST_ERROR = 13;
+  int TAG_NAME = 13;
   /** RegularExpression Id. */
-  int ATTR_NAME = 15;
+  int LST_ERROR = 14;
   /** RegularExpression Id. */
-  int END_OF_TAG = 16;
+  int ATTR_NAME = 16;
   /** RegularExpression Id. */
-  int ATTR_EQ = 17;
+  int END_OF_TAG = 17;
   /** RegularExpression Id. */
-  int LIT_ERROR = 18;
+  int ATTR_EQ = 18;
   /** RegularExpression Id. */
-  int ATTR_VAL = 19;
+  int LIT_ERROR = 19;
   /** RegularExpression Id. */
-  int ERROR = 20;
+  int QUOTED_STRING = 20;
   /** RegularExpression Id. */
-  int COMMENT_END = 21;
+  int ATTR_VAL = 21;
   /** RegularExpression Id. */
-  int COMMENT_WORD = 22;
+  int ERROR = 22;
   /** RegularExpression Id. */
-  int DECL_TAG = 23;
+  int COMMENT_END = 23;
   /** RegularExpression Id. */
-  int DECL_ATTR = 24;
+  int COMMENT_WORD = 24;
   /** RegularExpression Id. */
-  int DECL_END = 25;
+  int DECL_TAG = 25;
+  /** RegularExpression Id. */
+  int DECL_ATTR = 26;
+  /** RegularExpression Id. */
+  int DECL_END = 27;
 
   /** Lexical state. */
   int DECLARATION = 0;
@@ -80,7 +84,8 @@ public interface TagParserConstants {
     "<SPACE>",
     "<ATTR_IDENTIFIER>",
     "<NAME_IDENTIFIER>",
-    "<QUOTED_STRING>",
+    "<SQUOTE>",
+    "<DQUOTE>",
     "\">\"",
     "\"/>\"",
     "\"<\"",
@@ -90,11 +95,12 @@ public interface TagParserConstants {
     "<RAWTEXT>",
     "<TAG_NAME>",
     "<LST_ERROR>",
-    "<token of kind 14>",
+    "<token of kind 15>",
     "<ATTR_NAME>",
     "<END_OF_TAG>",
     "\"=\"",
     "<LIT_ERROR>",
+    "<QUOTED_STRING>",
     "<ATTR_VAL>",
     "<ERROR>",
     "\"-->\"",

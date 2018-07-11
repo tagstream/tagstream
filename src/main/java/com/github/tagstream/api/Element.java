@@ -13,10 +13,7 @@
  */
 package com.github.tagstream.api;
 
-import java.util.List;
-import java.util.Optional;
-
-import com.github.tagstream.api.impl.TagAttribute;
+import java.util.Map;
 
 public interface Element {
     /**
@@ -35,8 +32,9 @@ public interface Element {
      */
     boolean supportsAttributes();
 
-    
-    List<TagAttribute> getAttributes();
+    Map<String, String> getAttributes();
+
+    String getValue();
 
     /**
      * Accepts a Visitor to visit
@@ -60,39 +58,21 @@ public interface Element {
         return false;
     }
 
-    default Optional<TagAttribute> getAttribute(String attrName) {
-        return getAttributes().parallelStream().filter(attr -> attr.getName().equals(attrName)).findFirst();
-    }
-
     default boolean containsAttribute(String attrName) {
-        if (supportsAttributes()) {
-            return getAttributes().parallelStream().anyMatch(attr -> attr.getName().equalsIgnoreCase(attrName));
-        }
-        return false;
-    }
-
-    default boolean attributeHasValue(String attrName) {
-        if (supportsAttributes()) {
-            return getAttributes().parallelStream()
-                    .anyMatch(attr -> attr.getName().equalsIgnoreCase(attrName) && attr.isValueAssigned());
-        }
-        return false;
+        return getAttributes().containsKey(attrName);
     }
 
     default String getAttributeValue(String name) {
         if (supportsAttributes()) {
-            Optional<TagAttribute> attribute = getAttributes().parallelStream()
-                    .filter(attr -> attr.getName().equalsIgnoreCase(name) && attr.isValueAssigned()).findFirst();
-            if (attribute.isPresent()) {
-                return attribute.get().getValue();
-            }
+            return getAttributes().get(name);
         }
         return null;
     }
 
     default void setAttribute(String name, String value) {
         if (supportsAttributes()) {
-            getAttributes().add(new TagAttribute(name, value));
+            getAttributes().put(name, value);
+            return;
         }
         throw new UnsupportedOperationException();
     }

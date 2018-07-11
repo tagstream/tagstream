@@ -18,7 +18,6 @@ import java.util.function.Function;
 import java.util.stream.Stream;
 
 import com.github.tagstream.api.Element;
-import com.github.tagstream.api.Tag;
 import com.github.tagstream.api.impl.TextData;
 import com.github.tagstream.util.HtmlEntityTranslator;
 
@@ -31,7 +30,7 @@ public class HtmlTextEncoder implements Function<Element, Stream<Element>> {
         switch (element.getType()) {
 
         case START_TAG:
-            String name = ((Tag) element).getName();
+            String name = element.getValue();
             switch (name) {
             case "noframes":
             case "noscript":
@@ -44,7 +43,7 @@ public class HtmlTextEncoder implements Function<Element, Stream<Element>> {
             }
             break;
         case END_TAG:
-            String endName = ((Tag) element).getName();
+            String endName = element.getValue();
             switch (endName) {
             case "noframes":
             case "noscript":
@@ -64,7 +63,7 @@ public class HtmlTextEncoder implements Function<Element, Stream<Element>> {
         case TEXT:
             if (!insideOf.isEmpty()) {
                 TextData text = (TextData)element;
-                text.setText(HtmlEntityTranslator.encodeHTML(text.getText()));
+                text.setText(HtmlEntityTranslator.encodeHTML(text.getValue()));
             }
             break;
         default:

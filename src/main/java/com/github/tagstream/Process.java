@@ -11,7 +11,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.tagstream.api;
+package com.github.tagstream;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -20,12 +20,14 @@ import java.util.function.BiConsumer;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
+import com.github.tagstream.api.Element;
+
 /**
  * 
  * 
  *
  */
-public interface Process extends BiConsumer<Element,Process> {
+public class Process {
 
     List<Element> list = new ArrayList<>();
 
@@ -34,21 +36,22 @@ public interface Process extends BiConsumer<Element,Process> {
      * the accept method of the consumer so that they may be passed on to the next
      * process.
      */
-    default void next(Element... elements) {
+    public void next(Element... elements) {
         Collections.addAll(list, elements);
     }
 
-    default Function<Element, Stream<Element>> createFlatMap(Process process) {
+    Function<Element, Stream<Element>> createFlatMap(BiConsumer<Element, Process> consumer, Process process) {
+
         return element -> {
             list.clear();
-            accept(element,process);
-            List<Element> test = list;
+            consumer.accept(element, process);
             return list.stream();
         };
     }
-    
-    public static Function<Element, Stream<Element>> chain(Process doProcess){
-        return doProcess.createFlatMap(doProcess);
+
+    public static Function<Element, Stream<Element>> chain(BiConsumer<Element, Process> consumer) {
+        Process process = new Process();
+        return process.createFlatMap(consumer, process);
     }
 
 }

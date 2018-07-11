@@ -29,36 +29,39 @@ public class HtmlStreams {
         switch (element.getType()) {
         case COMMENT:
             sb.append("<!--");
-            sb.append(element.toString());
+            sb.append(element.getValue());
             sb.append("-->");
             break;
         case DECLARATION:
             sb.append("<!");
-            sb.append(element.toString());
+            sb.append(element.getValue());
             sb.append(">");
             break;
         case END_TAG:
             sb.append("</");
-            sb.append(element.toString());
+            sb.append(element.getValue());
             sb.append('>');
             break;
         case EOF:
             break;
         case START_TAG:
             sb.append('<');
-            sb.append(element.toString());
+            sb.append(element.getValue());
             StartTag tag = (StartTag) element;
             if (tag.hasAttributes()) {
                 sb.append(' ');
-                sb.append(tag.getAttributes().stream().map(a -> {
+                sb.append(tag.getAttributes().entrySet().stream().map(entry -> {
                     StringBuilder attr1 = new StringBuilder();
-                    attr1.append(a.getName());
-                    if (a.isValueAssigned()) {
+                    attr1.append(entry.getKey());
+                    String value = entry.getValue();
+                    if (value != null) {
                         attr1.append('=');
-                        if (a.isQuoted()) {
-                            attr1.append(a.getQuoted());
+                        if (value.contains(" ")) {
+                            attr1.append("'");
+                            attr1.append(value);
+                            attr1.append("'");
                         } else {
-                            attr1.append(a.getValue());
+                            attr1.append(entry.getValue());
                         }
                     } 
                     return attr1.toString();

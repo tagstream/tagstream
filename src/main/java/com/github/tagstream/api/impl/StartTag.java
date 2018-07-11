@@ -14,23 +14,19 @@
 package com.github.tagstream.api.impl;
 
 import java.util.Collections;
-import java.util.List;
+import java.util.Map;
 
+import com.github.tagstream.api.Element;
 import com.github.tagstream.api.ElementType;
-import com.github.tagstream.api.Tag;
 
-public class StartTag implements Tag {
+public class StartTag implements Element {
 
     private String tagName;
-    private List<TagAttribute> attributes = Collections.emptyList();
+    private Map<String, String> attributes = Collections.emptyMap();
 
-    public StartTag(String tag, List<TagAttribute> attrList) {
+    public StartTag(String tag, Map<String, String> attrList) {
         tagName = tag;
         attributes = attrList;
-    }
-
-    public void addAttribute(TagAttribute attribute) {
-        attributes.add(attribute);
     }
 
     @Override
@@ -39,7 +35,7 @@ public class StartTag implements Tag {
     }
 
     @Override
-    public String getName() {
+    public String getValue() {
         return tagName;
     }
 
@@ -49,7 +45,7 @@ public class StartTag implements Tag {
     }
 
     @Override
-    public List<TagAttribute> getAttributes() {
+    public Map<String, String> getAttributes() {
         return attributes;
     }
 }

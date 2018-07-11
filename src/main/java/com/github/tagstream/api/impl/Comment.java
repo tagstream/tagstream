@@ -14,7 +14,7 @@
 package com.github.tagstream.api.impl;
 
 import java.util.Collections;
-import java.util.List;
+import java.util.Map;
 
 import com.github.tagstream.api.Element;
 import com.github.tagstream.api.ElementType;
@@ -32,7 +32,7 @@ public class Comment implements Element {
         return ElementType.COMMENT;
     }
     
-    public String toString() {
+    public String getValue() {
         return value;
     }
 
@@ -42,8 +42,9 @@ public class Comment implements Element {
     }
 
     @Override
-    public List<TagAttribute> getAttributes() {
-        return Collections.emptyList();
+    public Map<String, String> getAttributes() {
+        return Collections.emptyMap();
     }
+
 
 }

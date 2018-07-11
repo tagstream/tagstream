@@ -72,28 +72,39 @@ public class TagParser implements TagParserConstants {
   }
 
 /** @return an attribute */
-  final public TagAttribute attribute() throws ParseException {
+  final public void attribute(Map<String,String > alist) throws ParseException {
   Token t1, t2=null;
     t1 = jj_consume_token(ATTR_NAME);
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case ATTR_EQ:
-      jj_consume_token(ATTR_EQ);
-      t2 = jj_consume_token(ATTR_VAL);
+    case ATTR_VAL:
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case ATTR_EQ:
+        jj_consume_token(ATTR_EQ);
+        t2 = jj_consume_token(QUOTED_STRING);
+        break;
+      case ATTR_VAL:
+        t2 = jj_consume_token(ATTR_VAL);
+        break;
+      default:
+        jj_la1[2] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
+      }
       break;
     default:
-      jj_la1[2] = jj_gen;
+      jj_la1[3] = jj_gen;
       ;
     }
-    if (t2 == null)
-      {if (true) return new TagAttribute(t1.image);}
-    else
-      {if (true) return new TagAttribute(t1.image, t2.image);}
-    throw new Error("Missing return statement in function");
+     if (t2 == null) {
+        alist.put(t1.image,null);
+      } else {
+        alist.put(t1.image,t2.image);
+     }
   }
 
-  final public List<TagAttribute> attributeList() throws ParseException {
-  List<TagAttribute> alist = new ArrayList<TagAttribute>();
-  TagAttribute a;
+  final public Map<String,String> attributeList() throws ParseException {
+  Map<String,String> alist = new HashMap<String,String>();
     label_1:
     while (true) {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -101,11 +112,10 @@ public class TagParser implements TagParserConstants {
         ;
         break;
       default:
-        jj_la1[3] = jj_gen;
+        jj_la1[4] = jj_gen;
         break label_1;
       }
-      a = attribute();
-                   alist.add(a);
+      attribute(alist);
     }
      {if (true) return alist;}
     throw new Error("Missing return statement in function");
@@ -113,7 +123,7 @@ public class TagParser implements TagParserConstants {
 
   final public Element tag() throws ParseException {
   Token t, et;
-  List<TagAttribute> alist;
+  Map<String,String> alist;
   Token firstToken = getToken(1);
     try {
       jj_consume_token(TAG_START);
@@ -156,7 +166,7 @@ public class TagParser implements TagParserConstants {
         ;
         break;
       default:
-        jj_la1[4] = jj_gen;
+        jj_la1[5] = jj_gen;
         break label_2;
       }
       jj_consume_token(COMMENT_WORD);
@@ -170,7 +180,7 @@ public class TagParser implements TagParserConstants {
       jj_consume_token(COMMENT_END);
       break;
     default:
-      jj_la1[5] = jj_gen;
+      jj_la1[6] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -181,7 +191,7 @@ public class TagParser implements TagParserConstants {
 /** @return the start of a DECLARATION */
   final public Element decltag() throws ParseException {
   Token tok = null;
-  List<TagAttribute> alist = new ArrayList<TagAttribute>();
+  Map<String,String > alist = new HashMap<String,String>();
   Token firstToken = getToken(1);
     try {
       jj_consume_token(DECL_START);
@@ -193,11 +203,11 @@ public class TagParser implements TagParserConstants {
           ;
           break;
         default:
-          jj_la1[6] = jj_gen;
+          jj_la1[7] = jj_gen;
           break label_3;
         }
         jj_consume_token(DECL_ATTR);
-                                                 alist.add(new TagAttribute(token.image));
+                                                 alist.put(token.image,null);
       }
       jj_consume_token(DECL_END);
       {if (true) return new StartTag(tok.image, alist);}
@@ -223,12 +233,6 @@ public class TagParser implements TagParserConstants {
     finally { jj_save(1, xla); }
   }
 
-  private boolean jj_3R_4() {
-    if (jj_scan_token(TAG_START)) return true;
-    if (jj_scan_token(TAG_NAME)) return true;
-    return false;
-  }
-
   private boolean jj_3_1() {
     if (jj_3R_4()) return true;
     return false;
@@ -237,6 +241,12 @@ public class TagParser implements TagParserConstants {
   private boolean jj_3_2() {
     if (jj_scan_token(TAG_START)) return true;
     if (jj_scan_token(LST_ERROR)) return true;
+    return false;
+  }
+
+  private boolean jj_3R_4() {
+    if (jj_scan_token(TAG_START)) return true;
+    if (jj_scan_token(TAG_NAME)) return true;
     return false;
   }
 
@@ -251,13 +261,13 @@ public class TagParser implements TagParserConstants {
   private Token jj_scanpos, jj_lastpos;
   private int jj_la;
   private int jj_gen;
-  final private int[] jj_la1 = new int[7];
+  final private int[] jj_la1 = new int[8];
   static private int[] jj_la1_0;
   static {
       jj_la1_init_0();
    }
    private static void jj_la1_init_0() {
-      jj_la1_0 = new int[] {0x700,0x801,0x20000,0x8000,0x400000,0x200001,0x1000000,};
+      jj_la1_0 = new int[] {0xe00,0x1001,0x240000,0x240000,0x10000,0x1000000,0x800001,0x4000000,};
    }
   final private JJCalls[] jj_2_rtns = new JJCalls[2];
   private boolean jj_rescan = false;
@@ -274,7 +284,7 @@ public class TagParser implements TagParserConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 7; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 8; i++) jj_la1[i] = -1;
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
@@ -289,7 +299,7 @@ public class TagParser implements TagParserConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 7; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 8; i++) jj_la1[i] = -1;
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
@@ -300,7 +310,7 @@ public class TagParser implements TagParserConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 7; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 8; i++) jj_la1[i] = -1;
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
@@ -311,7 +321,7 @@ public class TagParser implements TagParserConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 7; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 8; i++) jj_la1[i] = -1;
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
@@ -321,7 +331,7 @@ public class TagParser implements TagParserConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 7; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 8; i++) jj_la1[i] = -1;
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
@@ -331,7 +341,7 @@ public class TagParser implements TagParserConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 7; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 8; i++) jj_la1[i] = -1;
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
@@ -443,12 +453,12 @@ public class TagParser implements TagParserConstants {
   /** Generate ParseException. */
   public ParseException generateParseException() {
     jj_expentries.clear();
-    boolean[] la1tokens = new boolean[26];
+    boolean[] la1tokens = new boolean[28];
     if (jj_kind >= 0) {
       la1tokens[jj_kind] = true;
       jj_kind = -1;
     }
-    for (int i = 0; i < 7; i++) {
+    for (int i = 0; i < 8; i++) {
       if (jj_la1[i] == jj_gen) {
         for (int j = 0; j < 32; j++) {
           if ((jj_la1_0[i] & (1<<j)) != 0) {
@@ -457,7 +467,7 @@ public class TagParser implements TagParserConstants {
         }
       }
     }
-    for (int i = 0; i < 26; i++) {
+    for (int i = 0; i < 28; i++) {
       if (la1tokens[i]) {
         jj_expentry = new int[1];
         jj_expentry[0] = i;

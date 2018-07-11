@@ -48,12 +48,13 @@ public class TagParser {
 
 PARSER_END(TagParser)
 
-<*> TOKEN :
+< * >TOKEN :
 {
   <#SPACE: ( " " | "\t" | "\n" | "\r" | "\u000C" ) >
 | <#ATTR_IDENTIFIER:  (~[" ", "\t", "\n", "\r", "\u000C", "=", "/", ">" ])+ >
 | <#NAME_IDENTIFIER:  (~[" ", "\t", "\n", "\r", "\u000C", "/", ">" ])+ >
-| <#QUOTED_STRING: ( "'" ( ~["'"] )* "'" ) | ( "\"" ( ~["\""] )* "\"" ) >
+| <#SQUOTE : ( "'" ( ~["'"] )* "'") >
+| <#DQUOTE : ( "\"" ( ~["\""] )* "\"") >
 | <#TAG_END: ">" >
 | <#TAG_SLASHEND: "/>" >
 }
@@ -91,8 +92,8 @@ PARSER_END(TagParser)
 
 <ATTR_VALUE> TOKEN :
 {
-  <ATTR_VAL: <QUOTED_STRING> 
-| ( ~[">", "\"", "'", " ", "\t", "\n", "\r"] )+ > : IN_TAG
+  <QUOTED_STRING : < SQUOTE > | < DQUOTE > >{matchedToken.image = image.substring(1, lengthOfMatch - 1);} : IN_TAG
+| <ATTR_VAL:  ( ~[">", "\"", "'", " ", "\t", "\n", "\r"] )+ > : IN_TAG
 | <ERROR: ~[]>
 }
 
@@ -135,26 +136,28 @@ Element element() :
 }
 
 /** @return an attribute */
-TagAttribute attribute() : 
+void attribute(Map<String,String > alist) : 
 {
   Token t1, t2=null;
 }
 {
-  t1=<ATTR_NAME> [ <ATTR_EQ> t2=<ATTR_VAL> ]
-  { if (t2 == null) 
-      return new TagAttribute(t1.image); 
-    else
-      return new TagAttribute(t1.image, t2.image);
+  t1=<ATTR_NAME> [ <ATTR_EQ> t2= < QUOTED_STRING > | t2 = <ATTR_VAL> ]
+  {
+     if (t2 == null) {
+        alist.put(t1.image,null);
+      } else {
+        alist.put(t1.image,t2.image);
+     }
   }
 }
 
-List<TagAttribute> attributeList() : 
+Map<String,String> attributeList() : 
 {
-  List<TagAttribute> alist = new ArrayList<TagAttribute>();
-  TagAttribute a;
+  Map<String,String> alist = new HashMap<String,String>();
+
 }
 {
-  (a=attribute() { alist.add(a); } )*
+  (attribute(alist) )*
   {
      return alist;
   }
@@ -164,7 +167,7 @@ List<TagAttribute> attributeList() :
 Element tag() :
 {
   Token t, et;
-  List<TagAttribute> alist;
+  Map<String,String> alist;
   Token firstToken = getToken(1);
 }
 {
@@ -211,12 +214,12 @@ Comment commentHtmlElement() :
 Element decltag() :
 {
   Token tok = null;
-  List<TagAttribute> alist = new ArrayList<TagAttribute>();
+  Map<String,String > alist = new HashMap<String,String>();
   Token firstToken = getToken(1);
 }
 {
   try {
-    <DECL_START> tok=<DECL_TAG> (< DECL_ATTR > { alist.add(new TagAttribute(token.image)); })* <DECL_END>
+    <DECL_START> tok=<DECL_TAG> (< DECL_ATTR > { alist.put(token.image,null); })* <DECL_END>
     {
       return new StartTag(tok.image, alist); 
     }
