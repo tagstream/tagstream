@@ -23,13 +23,18 @@ import java.util.stream.Stream;
 import com.github.tagstream.api.Element;
 
 /**
+ * Utility class that allows you to define a flatMap process in the form of a
+ * BiConsumer<Element,Process> lambda.
  * 
  * 
  *
  */
 public class Process {
 
-    List<Element> list = new ArrayList<>();
+    private List<Element> list = new ArrayList<>();
+
+    private Process() {
+    }
 
     /**
      * Collects all the elements that are either being passed through or created in
@@ -41,7 +46,6 @@ public class Process {
     }
 
     Function<Element, Stream<Element>> createFlatMap(BiConsumer<Element, Process> consumer, Process process) {
-
         return element -> {
             list.clear();
             consumer.accept(element, process);
