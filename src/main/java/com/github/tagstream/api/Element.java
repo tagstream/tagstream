@@ -13,16 +13,33 @@
  */
 package com.github.tagstream.api;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
 import com.github.tagstream.api.impl.TagAttribute;
 
 public interface Element {
+    /**
+     * Retrieve the associated ElementType
+     * 
+     * @return the type of element
+     */
+    ElementType getType();
 
     /**
-     * Accepts a Visitor object to then visit
+     * Must be defined as true to allow default methods to work correctly, this
+     * method and the getAttributes method are used together to implement attribute
+     * support in an element.
+     * 
+     * @return true if Element supports attributes
+     */
+    boolean supportsAttributes();
+
+    
+    List<TagAttribute> getAttributes();
+
+    /**
+     * Accepts a Visitor to visit
      * 
      * @param visitor
      * @return
@@ -32,41 +49,51 @@ public interface Element {
     }
 
     /**
-     * Retreive the associated ElementType
-     * 
-     * @return the type of element
-     */
-    ElementType getType();
-
-    /**
-     * Whether this element supports Attributes
+     * Whether this element contains Attributes
      * 
      * @return
      */
     default boolean hasAttributes() {
+        if (supportsAttributes()) {
+            return !getAttributes().isEmpty();
+        }
         return false;
     }
 
-    default List<TagAttribute> getAttributes() {
-        return Collections.emptyList();
-    }
-
     default Optional<TagAttribute> getAttribute(String attrName) {
-        return Optional.empty();
+        return getAttributes().parallelStream().filter(attr -> attr.getName().equals(attrName)).findFirst();
     }
 
     default boolean containsAttribute(String attrName) {
+        if (supportsAttributes()) {
+            return getAttributes().parallelStream().anyMatch(attr -> attr.getName().equalsIgnoreCase(attrName));
+        }
         return false;
     }
 
     default boolean attributeHasValue(String attrName) {
+        if (supportsAttributes()) {
+            return getAttributes().parallelStream()
+                    .anyMatch(attr -> attr.getName().equalsIgnoreCase(attrName) && attr.isValueAssigned());
+        }
         return false;
     }
 
     default String getAttributeValue(String name) {
+        if (supportsAttributes()) {
+            Optional<TagAttribute> attribute = getAttributes().parallelStream()
+                    .filter(attr -> attr.getName().equalsIgnoreCase(name) && attr.isValueAssigned()).findFirst();
+            if (attribute.isPresent()) {
+                return attribute.get().getValue();
+            }
+        }
         return null;
     }
-    
+
     default void setAttribute(String name, String value) {
+        if (supportsAttributes()) {
+            getAttributes().add(new TagAttribute(name, value));
+        }
+        throw new UnsupportedOperationException();
     }
 }

@@ -15,7 +15,6 @@ package com.github.tagstream.api.impl;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 import com.github.tagstream.api.ElementType;
 import com.github.tagstream.api.Tag;
@@ -30,47 +29,8 @@ public class StartTag implements Tag {
         attributes = attrList;
     }
 
-    @Override
-    public boolean hasAttributes() {
-        return !attributes.isEmpty();
-    }
-
     public void addAttribute(TagAttribute attribute) {
         attributes.add(attribute);
-    }
-
-    @Override
-    public boolean containsAttribute(String attrName) {
-        return attributes.stream().anyMatch(attr -> attr.getName().equalsIgnoreCase(attrName));
-    }
-
-    @Override
-    public boolean attributeHasValue(String name) {
-        return attributes.stream().anyMatch(attr -> attr.getName().equalsIgnoreCase(name) && attr.isValueAssigned());
-    }
-
-    @Override
-    public String getAttributeValue(String name) {
-        Optional<TagAttribute> attribute = attributes.stream()
-                .filter(attr -> attr.getName().equalsIgnoreCase(name) && attr.isValueAssigned()).findFirst();
-        if (attribute.isPresent()) {
-            return attribute.get().getValue();
-        }
-        return null;
-    }
-
-    @Override
-    public List<TagAttribute> getAttributes() {
-        return attributes;
-    }
-
-    @Override
-    public Optional<TagAttribute> getAttribute(String attrName) {
-        return attributes.stream().filter(attr -> attr.getName().equals(attrName)).findFirst();
-    }
-
-    public String toString() {
-        return tagName;
     }
 
     @Override
@@ -81,5 +41,15 @@ public class StartTag implements Tag {
     @Override
     public String getName() {
         return tagName;
+    }
+
+    @Override
+    public boolean supportsAttributes() {
+        return true;
+    }
+
+    @Override
+    public List<TagAttribute> getAttributes() {
+        return attributes;
     }
 }

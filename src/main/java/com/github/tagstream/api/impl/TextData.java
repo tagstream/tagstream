@@ -16,14 +16,21 @@ package com.github.tagstream.api.impl;
  * Plain text
  */
 
+import java.util.Collections;
+import java.util.List;
+
 import com.github.tagstream.api.Element;
 import com.github.tagstream.api.ElementType;
 
+/**
+ * Represents the data that is found between tags.
+ * 
+ *
+ */
 public class TextData implements Element {
 
     private String value;
 
-    /** Constructor. */
     public TextData(String t) {
         value = t;
     }
@@ -43,6 +50,16 @@ public class TextData implements Element {
     
     public void setText(String text) {
         this.value = text;
+    }
+
+    @Override
+    public boolean supportsAttributes() {
+        return false;
+    }
+
+    @Override
+    public List<TagAttribute> getAttributes() {
+        return Collections.emptyList();
     }
     
 }

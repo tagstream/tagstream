@@ -15,17 +15,32 @@ package com.github.tagstream.api.impl;
 
 import java.util.List;
 
+import com.github.tagstream.api.Element;
 import com.github.tagstream.api.ElementType;
 
-public class DocType extends StartTag {
+public class DocType implements Element {
+    
+    private String name;
+    private List<TagAttribute> attributes;
 
     public DocType(String tag, List<TagAttribute> attrList) {
-        super(tag, attrList);
+        this.name = tag;
+        this.attributes = attrList;
     }
     
     @Override
     public ElementType getType() {
         return ElementType.DECLARATION;
+    }
+
+    @Override
+    public boolean supportsAttributes() {
+        return true;
+    }
+
+    @Override
+    public List<TagAttribute> getAttributes() {
+        return attributes;
     }
 
 }

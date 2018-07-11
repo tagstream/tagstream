@@ -13,6 +13,9 @@
  */
 package com.github.tagstream.api.impl;
 
+import java.util.Collections;
+import java.util.List;
+
 import com.github.tagstream.api.Element;
 import com.github.tagstream.api.ElementType;
 
@@ -31,6 +34,16 @@ public class Comment implements Element {
     
     public String toString() {
         return value;
+    }
+
+    @Override
+    public boolean supportsAttributes() {
+        return false;
+    }
+
+    @Override
+    public List<TagAttribute> getAttributes() {
+        return Collections.emptyList();
     }
 
 }

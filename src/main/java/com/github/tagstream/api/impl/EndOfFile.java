@@ -13,6 +13,9 @@
  */
 package com.github.tagstream.api.impl;
 
+import java.util.Collections;
+import java.util.List;
+
 import com.github.tagstream.api.Element;
 import com.github.tagstream.api.ElementType;
 
@@ -21,6 +24,16 @@ public class EndOfFile implements Element {
     @Override
     public ElementType getType() {
         return ElementType.EOF;
+    }
+
+    @Override
+    public boolean supportsAttributes() {
+        return false;
+    }
+
+    @Override
+    public List<TagAttribute> getAttributes() {
+        return Collections.emptyList();
     }
 
 }

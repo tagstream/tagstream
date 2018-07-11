@@ -15,6 +15,7 @@ package com.github.tagstream.api.impl;
 
 import com.github.tagstream.api.ElementAttribute;
 
+
 public class TagAttribute implements ElementAttribute {
 
     private String name;
