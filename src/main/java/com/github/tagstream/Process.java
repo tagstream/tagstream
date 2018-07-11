@@ -26,7 +26,9 @@ import com.github.tagstream.api.Element;
  * Utility class that allows you to define a flatMap process in the form of a
  * BiConsumer<Element,Process> lambda.
  * 
- * 
+ * This allows you to use the next() method to collect the elements that will be
+ * passed on. This can modify the eventual output and assists in use cases where
+ * there is a need to add or remove elements
  *
  */
 public class Process {

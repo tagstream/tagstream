@@ -61,7 +61,7 @@ public class HtmlStreams {
                             attr1.append(value);
                             attr1.append("'");
                         } else {
-                            attr1.append(entry.getValue());
+                            attr1.append(value);
                         }
                     } 
                     return attr1.toString();
