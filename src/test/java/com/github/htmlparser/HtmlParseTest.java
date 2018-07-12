@@ -30,7 +30,7 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.ext.DefaultHandler2;
 
-import com.github.tagstream.Process;
+import com.github.tagstream.ElementMapper;
 import com.github.tagstream.Tag;
 import com.github.tagstream.api.Element;
 import com.github.tagstream.api.ElementType;
@@ -79,7 +79,7 @@ public class HtmlParseTest {
 
     @Test
     public void docParseTagTest3() throws Exception {
-        long count = stream.flatMap(Process.chain((element, process) -> {
+        long count = stream.flatMap(ElementMapper.map((element, process) -> {
             if (element.containsAttribute("href")) {
                 System.out.println(element.getAttributeValue("href"));
                 process.next(element);
@@ -88,7 +88,7 @@ public class HtmlParseTest {
         assertEquals(356, count);
     }
 
-    private static Function<Element, Stream<Element>> CONVERT_LINKS = Process.chain((element, process) -> {
+    private static Function<Element, Stream<Element>> CONVERT_LINKS = ElementMapper.map((element, process) -> {
         if (element.containsAttribute("href")) {
             String value = element.getAttributeValue("href");
             if (value != null && value.startsWith("/")) {
