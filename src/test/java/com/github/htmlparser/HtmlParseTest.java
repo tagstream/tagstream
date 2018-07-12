@@ -21,6 +21,7 @@ import static org.junit.Assert.assertEquals;
 
 import java.io.InputStream;
 import java.text.ParseException;
+import java.util.function.Function;
 import java.util.stream.Stream;
 
 import org.junit.Before;
@@ -87,32 +88,31 @@ public class HtmlParseTest {
         assertEquals(356, count);
     }
 
+    private static Function<Element, Stream<Element>> CONVERT_LINKS = Process.chain((element, process) -> {
+        if (element.containsAttribute("href")) {
+            String value = element.getAttributeValue("href");
+            if (value != null && value.startsWith("/")) {
+                element.setAttribute("href", "http://www.apache.org" + value);
+            }
+        }
+        if (element.containsAttribute("src")) {
+            String value = element.getAttributeValue("src");
+            if (value != null && value.startsWith("/")) {
+                element.setAttribute("src", "http://www.apache.org" + value);
+            }
+        }
+        process.next(element);
+    });
+
     @Test
     public void convertLinkTest() throws Exception {
-        long count = stream.flatMap(Process.chain((element, process) -> {
-            if (element.containsAttribute("href")) {
-                String value = element.getAttributeValue("href");
-                if (value != null && value.startsWith("/")) {
-                    element.setAttribute("href", "http://www.apache.org" + value);
-                }
-                process.next(element);
-            }
-
-        })).count();
-        assertEquals(356, count);
+        long count = stream.flatMap(CONVERT_LINKS).count();
+        assertEquals(2928, count);
     }
 
     @Test
     public void convertLinkAndPrintTest() throws Exception {
-        stream.flatMap(Process.chain((element, process) -> {
-            if (element.containsAttribute("href")) {
-                String value = element.getAttributeValue("href");
-                if (value != null && value.startsWith("/")) {
-                    element.setAttribute("href", "http://www.apache.org" + value);
-                }
-            }
-            process.next(element);
-        })).map(HtmlStreams.TO_HTML).forEach(System.out::print);
+        stream.flatMap(CONVERT_LINKS).map(HtmlStreams.TO_HTML).forEach(System.out::print);
     }
 
 }

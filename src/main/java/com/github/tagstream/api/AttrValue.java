@@ -16,7 +16,6 @@ package com.github.tagstream.api;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
 
-import com.github.tagstream.util.HtmlEntityTranslator;
 
 public class AttrValue implements CharSequence {
 
@@ -28,7 +27,7 @@ public class AttrValue implements CharSequence {
     }
     
     public AttrValue(String value) {
-        this.value = HtmlEntityTranslator.decodeHTML(value);
+        this.value = value;
     }
 
     public String getValue() {
@@ -42,14 +41,14 @@ public class AttrValue implements CharSequence {
         if (shouldBeQuoted()) {
             return getQuoted('"');
         }
-        return HtmlEntityTranslator.encodeHTML(value);
+        return value;
     }
     
     public String getQuoted(char paren) {
         if (isEmpty()) {
             return null;
         }
-        return paren + HtmlEntityTranslator.encodeHTML(value) + paren;
+        return paren + value + paren;
     }
 
     public boolean shouldBeQuoted() {
