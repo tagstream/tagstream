@@ -14,10 +14,13 @@
 package com.github.tagstream;
 
 import java.io.InputStream;
+import java.io.StringReader;
 import java.util.Spliterator;
 import java.util.Spliterators;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
+
+import org.apache.commons.io.input.ReaderInputStream;
 
 import com.github.tagstream.api.Element;
 
@@ -29,9 +32,13 @@ public class Tag {
 
     private Tag() {
     }
+    
+    public static Stream<Element> stream(String input) {
+        return stream(new ReaderInputStream(new StringReader(input)));
+    }
 
     public static Stream<Element> stream(InputStream is) {
-        return stream(new TagIterator(is));
+        return stream(is,"UTF-8");
     }
 
     public static Stream<Element> stream(InputStream is, String encoding) {
