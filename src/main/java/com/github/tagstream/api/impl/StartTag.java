@@ -16,15 +16,16 @@ package com.github.tagstream.api.impl;
 import java.util.Collections;
 import java.util.Map;
 
+import com.github.tagstream.api.AttrValue;
 import com.github.tagstream.api.Element;
 import com.github.tagstream.api.ElementType;
 
 public class StartTag implements Element {
 
     private String value;
-    private Map<String, String> attributes = Collections.emptyMap();
+    private Map<String, AttrValue> attributes = Collections.emptyMap();
 
-    public StartTag(String value, Map<String, String> attrList) {
+    public StartTag(String value, Map<String, AttrValue> attrList) {
         this.value = value;
         attributes = attrList;
     }
@@ -45,7 +46,7 @@ public class StartTag implements Element {
     }
 
     @Override
-    public Map<String, String> getAttributes() {
+    public Map<String, AttrValue> getAttributes() {
         return attributes;
     }
 }

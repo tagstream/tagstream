@@ -136,7 +136,7 @@ Element element() :
 }
 
 /** @return an attribute */
-void attribute(Map<String,String > alist) : 
+void attribute(Map<String,AttrValue > alist) : 
 {
   Token t1, t2=null;
 }
@@ -144,16 +144,16 @@ void attribute(Map<String,String > alist) :
   t1=<ATTR_NAME> [ <ATTR_EQ> t2= < QUOTED_STRING > | t2 = <ATTR_VAL> ]
   {
      if (t2 == null) {
-        alist.put(t1.image,null);
+        alist.put(t1.image,new AttrValue());
       } else {
-        alist.put(t1.image,t2.image);
+        alist.put(t1.image,new AttrValue(t2.image));
      }
   }
 }
 
-Map<String,String> attributeList() : 
+Map<String,AttrValue> attributeList() : 
 {
-  Map<String,String> alist = new HashMap<String,String>();
+  Map<String,AttrValue> alist = new HashMap<String,AttrValue>();
 
 }
 {
@@ -167,7 +167,7 @@ Map<String,String> attributeList() :
 Element tag() :
 {
   Token t, et;
-  Map<String,String> alist;
+  Map<String,AttrValue> alist;
   Token firstToken = getToken(1);
 }
 {
@@ -214,12 +214,12 @@ Comment commentHtmlElement() :
 Element decltag() :
 {
   Token tok = null;
-  Map<String,String > alist = new HashMap<String,String>();
+  Map<String,AttrValue > alist = new HashMap<String,AttrValue>();
   Token firstToken = getToken(1);
 }
 {
   try {
-    <DECL_START> tok=<DECL_TAG> (< DECL_ATTR > { alist.put(token.image,null); })* <DECL_END>
+    <DECL_START> tok=<DECL_TAG> (< DECL_ATTR > { alist.put(token.image,new AttrValue()); })* <DECL_END>
     {
       return new StartTag(tok.image, alist); 
     }

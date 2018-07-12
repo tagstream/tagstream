@@ -16,6 +16,7 @@ package com.github.tagstream.util;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import com.github.tagstream.api.AttrValue;
 import com.github.tagstream.api.Element;
 import com.github.tagstream.api.impl.StartTag;
 
@@ -51,20 +52,14 @@ public class HtmlStreams {
             if (tag.hasAttributes()) {
                 sb.append(' ');
                 sb.append(tag.getAttributes().entrySet().stream().map(entry -> {
-                    StringBuilder attr1 = new StringBuilder();
-                    attr1.append(entry.getKey());
-                    String value = entry.getValue();
-                    if (value != null) {
-                        attr1.append('=');
-                        if (!value.matches("^[^\"\'<> =]+$")) {
-                            attr1.append("'");
-                            attr1.append(value);
-                            attr1.append("'");
-                        } else {
-                            attr1.append(value);
-                        }
+                    StringBuilder sb2 = new StringBuilder();
+                    sb2.append(entry.getKey());
+                    AttrValue value = entry.getValue();
+                    if (!value.isEmpty()) {
+                        sb2.append("=");
+                        sb2.append(value.quoteIfNeeded());
                     } 
-                    return attr1.toString();
+                    return sb2.toString();
                 }).collect(Collectors.joining(" ")));
             }
             sb.append('>');

@@ -72,7 +72,7 @@ public class TagParser implements TagParserConstants {
   }
 
 /** @return an attribute */
-  final public void attribute(Map<String,String > alist) throws ParseException {
+  final public void attribute(Map<String,AttrValue > alist) throws ParseException {
   Token t1, t2=null;
     t1 = jj_consume_token(ATTR_NAME);
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -97,14 +97,14 @@ public class TagParser implements TagParserConstants {
       ;
     }
      if (t2 == null) {
-        alist.put(t1.image,null);
+        alist.put(t1.image,new AttrValue());
       } else {
-        alist.put(t1.image,t2.image);
+        alist.put(t1.image,new AttrValue(t2.image));
      }
   }
 
-  final public Map<String,String> attributeList() throws ParseException {
-  Map<String,String> alist = new HashMap<String,String>();
+  final public Map<String,AttrValue> attributeList() throws ParseException {
+  Map<String,AttrValue> alist = new HashMap<String,AttrValue>();
     label_1:
     while (true) {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -123,7 +123,7 @@ public class TagParser implements TagParserConstants {
 
   final public Element tag() throws ParseException {
   Token t, et;
-  Map<String,String> alist;
+  Map<String,AttrValue> alist;
   Token firstToken = getToken(1);
     try {
       jj_consume_token(TAG_START);
@@ -191,7 +191,7 @@ public class TagParser implements TagParserConstants {
 /** @return the start of a DECLARATION */
   final public Element decltag() throws ParseException {
   Token tok = null;
-  Map<String,String > alist = new HashMap<String,String>();
+  Map<String,AttrValue > alist = new HashMap<String,AttrValue>();
   Token firstToken = getToken(1);
     try {
       jj_consume_token(DECL_START);
@@ -207,7 +207,7 @@ public class TagParser implements TagParserConstants {
           break label_3;
         }
         jj_consume_token(DECL_ATTR);
-                                                 alist.put(token.image,null);
+                                                 alist.put(token.image,new AttrValue());
       }
       jj_consume_token(DECL_END);
       {if (true) return new StartTag(tok.image, alist);}

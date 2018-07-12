@@ -15,15 +15,16 @@ package com.github.tagstream.api.impl;
 
 import java.util.Map;
 
+import com.github.tagstream.api.AttrValue;
 import com.github.tagstream.api.Element;
 import com.github.tagstream.api.ElementType;
 
 public class DocType implements Element {
     
     private String value;
-    private Map<String,String> attributes;
+    private Map<String,AttrValue> attributes;
 
-    public DocType(String tag, Map<String,String> attrList) {
+    public DocType(String tag, Map<String,AttrValue> attrList) {
         this.value = tag;
         this.attributes = attrList;
     }
@@ -39,7 +40,7 @@ public class DocType implements Element {
     }
 
     @Override
-    public Map<String, String> getAttributes() {
+    public Map<String, AttrValue> getAttributes() {
         return attributes;
     }
 

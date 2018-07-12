@@ -32,7 +32,7 @@ public interface Element {
      */
     boolean supportsAttributes();
 
-    Map<String, String> getAttributes();
+    Map<String, AttrValue> getAttributes();
 
     String getValue();
 
@@ -64,14 +64,14 @@ public interface Element {
 
     default String getAttributeValue(String name) {
         if (supportsAttributes()) {
-            return getAttributes().get(name);
+            return getAttributes().get(name).toString();
         }
         return null;
     }
 
     default void setAttribute(String name, String value) {
         if (supportsAttributes()) {
-            getAttributes().put(name, value);
+            getAttributes().put(name, new AttrValue(value));
             return;
         }
         throw new UnsupportedOperationException();

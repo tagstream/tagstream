@@ -23,6 +23,7 @@ import org.xml.sax.ext.Attributes2Impl;
 import org.xml.sax.ext.DefaultHandler2;
 import org.xml.sax.ext.LexicalHandler;
 
+import com.github.tagstream.api.AttrValue;
 import com.github.tagstream.api.Element;
 
 public class HtmlSAXSupport implements Consumer<Element> {
@@ -79,10 +80,10 @@ public class HtmlSAXSupport implements Consumer<Element> {
 
     }
     
-    public static Attributes convert(Map<String,String> attributes) {
+    public static Attributes convert(Map<String,AttrValue> attributes) {
         Attributes2Impl response = new Attributes2Impl();
         attributes.entrySet().forEach(attr ->{
-            response.addAttribute("", "", attr.getKey(), "xsi:String", attr.getValue());
+            response.addAttribute("", "", attr.getKey(), "xsi:String", attr.getValue().toString());
         });
         return response;
     }
