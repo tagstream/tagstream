@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/JEBailey/tagstream.svg?branch=master)](https://travis-ci.org/JEBailey/tagstream) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0)
+
 # TagStream
 Module to provide a fast, HTML5/XML/XHTML tokenzier. TagStream takes an InputStream and separates the text into elements that define a Tag or Text data. 
 
