@@ -24,18 +24,18 @@ import com.github.tagstream.api.Element;
 
 /**
  * Utility class that allows you to define a flatMap process in the form of a
- * BiConsumer<Element,ElementMapper> lambda.
+ * BiConsumer<Element,TagMap> lambda.
  * 
  * This allows you to use the next() method to collect the elements that will be
  * passed on. This can modify the eventual output and assists in use cases where
  * there is a need to add or remove elements
  *
  */
-public class ElementMapper {
+public class TagMap {
 
     private List<Element> list = new ArrayList<>();
 
-    private ElementMapper() {
+    private TagMap() {
     }
 
     /**
@@ -47,7 +47,7 @@ public class ElementMapper {
         Collections.addAll(list, elements);
     }
 
-    Function<Element, Stream<Element>> createFlatMap(BiConsumer<Element, ElementMapper> consumer, ElementMapper mapper) {
+    Function<Element, Stream<Element>> createFlatMap(BiConsumer<Element, TagMap> consumer, TagMap mapper) {
         return element -> {
             list.clear();
             consumer.accept(element, mapper);
@@ -55,8 +55,8 @@ public class ElementMapper {
         };
     }
 
-    public static Function<Element, Stream<Element>> map(BiConsumer<Element, ElementMapper> consumer) {
-        ElementMapper mapper = new ElementMapper();
+    public static Function<Element, Stream<Element>> map(BiConsumer<Element, TagMap> consumer) {
+        TagMap mapper = new TagMap();
         return mapper.createFlatMap(consumer, mapper);
     }
 
