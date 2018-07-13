@@ -75,16 +75,16 @@ public class HtmlSAXSupport implements Consumer<Element> {
                 break;
             }
         } catch (SAXException se) {
-
+            //log message
         }
 
     }
     
     public static Attributes convert(Map<String,AttrValue> attributes) {
         Attributes2Impl response = new Attributes2Impl();
-        attributes.entrySet().forEach(attr ->{
-            response.addAttribute("", "", attr.getKey(), "xsi:String", attr.getValue().toString());
-        });
+        attributes.entrySet().forEach(attr ->
+            response.addAttribute("", "", attr.getKey(), "xsi:String", attr.getValue().toString())
+        );
         return response;
     }
 
