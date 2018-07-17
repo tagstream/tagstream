@@ -31,7 +31,7 @@ public class DocType implements Element {
     
     @Override
     public ElementType getType() {
-        return ElementType.DECLARATION;
+        return ElementType.DOCTYPE;
     }
 
     @Override

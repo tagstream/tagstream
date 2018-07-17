@@ -19,7 +19,7 @@ import java.util.regex.Pattern;
 
 public class AttrValue implements CharSequence {
 
-    Predicate<String> validValue = Pattern.compile("^[a-zA-Z][-_a-zA-Z0-9\\u00A0-\\u10FFFF]*$").asPredicate();
+    Predicate<String> nonQuotable = Pattern.compile("^[a-zA-Z][-_a-zA-Z0-9\\u00A0-\\u10FFFF]*$").asPredicate();
 
     private String value;
 
@@ -35,9 +35,6 @@ public class AttrValue implements CharSequence {
     }
 
     public String quoteIfNeeded() {
-        if (isEmpty()) {
-            return null;
-        }
         if (shouldBeQuoted()) {
             return getQuoted('"');
         }
@@ -55,7 +52,7 @@ public class AttrValue implements CharSequence {
         if (isEmpty()) {
             return false;
         }
-        return validValue.negate().test(value);
+        return nonQuotable.negate().test(value);
     }
     
     public boolean isEmpty() {

@@ -33,7 +33,7 @@ public class HtmlStreams {
             sb.append(element.getValue());
             sb.append("-->");
             break;
-        case DECLARATION:
+        case DOCTYPE:
             sb.append("<!");
             sb.append(element.getValue());
             sb.append(">");

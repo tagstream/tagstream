@@ -34,6 +34,11 @@ public interface Element {
 
     Map<String, AttrValue> getAttributes();
 
+    /**
+     * The String value that best represents what this element is.
+     * 
+     * @return
+     */
     String getValue();
 
     /**

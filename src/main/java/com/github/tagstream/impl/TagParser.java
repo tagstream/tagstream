@@ -188,7 +188,7 @@ public class TagParser implements TagParserConstants {
     throw new Error("Missing return statement in function");
   }
 
-/** @return the start of a DECLARATION */
+/** @return the start of a DOCTYPE */
   final public Element decltag() throws ParseException {
   Token tok = null;
   Map<String,AttrValue > alist = new HashMap<String,AttrValue>();

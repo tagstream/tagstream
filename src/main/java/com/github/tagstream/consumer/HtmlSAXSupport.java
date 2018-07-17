@@ -55,7 +55,7 @@ public class HtmlSAXSupport implements Consumer<Element> {
             case COMMENT:
                 lexicalHandler.comment(value.toCharArray(), 0, value.length());
                 break;
-            case DECLARATION:
+            case DOCTYPE:
                 break;
             case END_TAG:
                 lexicalHandler.endEntity(value);

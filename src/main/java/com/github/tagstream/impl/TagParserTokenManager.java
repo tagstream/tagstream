@@ -862,7 +862,7 @@ public static final String[] jjstrLiteralImages = {
 
 /** Lexer state names. */
 public static final String[] lexStateNames = {
-   "DECLARATION",
+   "DOCTYPE",
    "COMMENT",
    "IN_DECLARATION",
    "ATTR_VALUE",
