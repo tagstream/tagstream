@@ -1,16 +1,16 @@
 [![Build Status](https://travis-ci.org/JEBailey/tagstream.svg?branch=master)](https://travis-ci.org/JEBailey/tagstream) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0)
 
 # TagStream
-Module to provide a fast, HTML5/XML/XHTML tokenzier. TagStream takes an InputStream and separates the text into elements that define either a  tag or textual data. 
+Module to provide a fast, HTML5/XML tokenzier. TagStream takes an InputStream and tokenizes into a Tag or Text element.
 
 ## Using TagStream 
-There are two classes which provides access to the processing of an HTML/XML source. 
+There are multiple ways which provides access to the processing of an HTML/XML source. 
 
-### TagIterator
-The TagIterator allows you to iterate the HTML/XML document utilizing a pull methodology. Whenever you need the next element you request it and it is parsed and presented.
+### Iteration
+The ``TagIterator`` allows you to iterate the HTML/XML document utilizing a pull methodology. Whenever you request the next element, the element is tokenized from the InputStream
 
-### Tag
-The Tag class wraps the TagIterator to provide a ``Stream<Element>`` provider.
+### Stream
+The ``Tag`` class wraps the ``TagIterator`` to provide a ``Stream<Element>`` provider.
 
 
 Examples:
