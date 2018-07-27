@@ -26,7 +26,7 @@ import java.util.stream.Stream;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.github.tagstream.TagMap;
+import com.github.tagstream.TagMapping;
 import com.github.tagstream.Tag;
 import com.github.tagstream.api.Element;
 import com.github.tagstream.api.ElementType;
@@ -55,7 +55,7 @@ public class UnusualHtmlTest {
     
     @Test
     public void docParseTagTest3() throws Exception {
-        long count = stream.flatMap(TagMap.map((element,process) ->{
+        long count = stream.flatMap(TagMapping.map((element,process) ->{
             if (element.containsAttribute("href")) {
                 process.next(element, element);
             }
