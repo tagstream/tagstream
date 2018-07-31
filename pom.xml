@@ -78,4 +78,10 @@
     <groupId>com.github.tagstream</groupId>
     <name>HTML5 Parser and Stream Support</name>
     <description>Provides utilities to parse and pull HTML5 content or use as a Stream</description>
+    <scm>
+        <url>https://github.com/tagstream/tagstream</url>
+        <connection>scm:git:https://github.com/tagstream/tagstream.git</connection>
+        <tag>HEAD</tag>
+        <developerConnection>scm:git:https://github.com/tagstream/tagstream.git</developerConnection>
+    </scm>
 </project>
