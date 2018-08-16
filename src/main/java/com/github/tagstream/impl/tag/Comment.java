@@ -11,42 +11,41 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.tagstream.api.impl; 
+package com.github.tagstream.impl.tag;
 
+import java.util.Collections;
 import java.util.Map;
 
-import com.github.tagstream.api.AttrValue;
-import com.github.tagstream.api.Element;
-import com.github.tagstream.api.ElementType;
+import com.github.tagstream.AttrValue;
+import com.github.tagstream.Element;
+import com.github.tagstream.ElementType;
 
-public class DocType implements Element {
-    
+public class Comment implements Element {
+
     private String value;
-    private Map<String,AttrValue> attributes;
 
-    public DocType(String tag, Map<String,AttrValue> attrList) {
-        this.value = tag;
-        this.attributes = attrList;
+    public Comment(String text) {
+        this.value = text;
     }
-    
+
     @Override
     public ElementType getType() {
-        return ElementType.DOCTYPE;
+        return ElementType.COMMENT;
+    }
+    
+    public String getValue() {
+        return value;
     }
 
     @Override
     public boolean supportsAttributes() {
-        return true;
+        return false;
     }
 
     @Override
     public Map<String, AttrValue> getAttributes() {
-        return attributes;
+        return Collections.emptyMap();
     }
 
-    @Override
-    public String getValue() {
-        return value;
-    }
 
 }

@@ -17,8 +17,8 @@ import java.util.LinkedList;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
-import com.github.tagstream.api.Element;
-import com.github.tagstream.api.impl.TextData;
+import com.github.tagstream.Element;
+import com.github.tagstream.impl.tag.TextData;
 import com.github.tagstream.util.HtmlEntityTranslator;
 
 public class HtmlTextEncoder implements Function<Element, Stream<Element>> {

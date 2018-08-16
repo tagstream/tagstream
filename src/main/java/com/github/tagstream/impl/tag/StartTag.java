@@ -11,14 +11,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.tagstream.api.impl;
+package com.github.tagstream.impl.tag;
 
 import java.util.Collections;
 import java.util.Map;
 
-import com.github.tagstream.api.AttrValue;
-import com.github.tagstream.api.Element;
-import com.github.tagstream.api.ElementType;
+import com.github.tagstream.AttrValue;
+import com.github.tagstream.Element;
+import com.github.tagstream.ElementType;
 
 public class StartTag implements Element {
 

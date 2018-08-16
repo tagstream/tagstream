@@ -20,8 +20,6 @@ import java.util.function.BiConsumer;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
-import com.github.tagstream.api.Element;
-
 /**
  * Utility class that allows you to define a flatMap process in the form of a
  * BiConsumer<Element,TagMapping> lambda.

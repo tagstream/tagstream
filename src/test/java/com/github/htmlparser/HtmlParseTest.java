@@ -31,9 +31,9 @@ import org.xml.sax.SAXException;
 import org.xml.sax.ext.DefaultHandler2;
 
 import com.github.tagstream.TagMapping;
+import com.github.tagstream.Element;
+import com.github.tagstream.ElementType;
 import com.github.tagstream.Tag;
-import com.github.tagstream.api.Element;
-import com.github.tagstream.api.ElementType;
 import com.github.tagstream.consumer.HtmlSAXSupport;
 import com.github.tagstream.util.HtmlStreams;
 

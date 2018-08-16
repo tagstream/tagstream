@@ -11,20 +11,46 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.tagstream.api.impl;
+package com.github.tagstream.impl.tag;
+/**
+ * Plain text
+ */
 
 import java.util.Collections;
 import java.util.Map;
 
-import com.github.tagstream.api.AttrValue;
-import com.github.tagstream.api.Element;
-import com.github.tagstream.api.ElementType;
+import com.github.tagstream.AttrValue;
+import com.github.tagstream.Element;
+import com.github.tagstream.ElementType;
 
-public class EndOfFile implements Element {
+/**
+ * Represents the data that is found between tags.
+ * 
+ *
+ */
+public class TextData implements Element {
+
+    private String value;
+
+    public TextData(String t) {
+        value = t;
+    }
+
+    public String toString() {
+        return value;
+    }
 
     @Override
     public ElementType getType() {
-        return ElementType.EOF;
+        return ElementType.TEXT;
+    }
+   
+    public String getValue() {
+        return value;
+    }
+    
+    public void setText(String text) {
+        this.value = text;
     }
 
     @Override
@@ -36,10 +62,5 @@ public class EndOfFile implements Element {
     public Map<String, AttrValue> getAttributes() {
         return Collections.emptyMap();
     }
-
-    @Override
-    public String getValue() {
-        return "EOF";
-    }
-
+    
 }

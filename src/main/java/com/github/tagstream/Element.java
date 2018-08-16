@@ -11,7 +11,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.tagstream.api;
+package com.github.tagstream;
 
 import java.util.Map;
 

@@ -17,8 +17,6 @@ import java.io.InputStream;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-import com.github.tagstream.api.Element;
-import com.github.tagstream.api.ElementType;
 import com.github.tagstream.impl.TagParser;
 import com.github.tagstream.impl.ParseException;
 

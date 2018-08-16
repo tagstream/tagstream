@@ -27,9 +27,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.github.tagstream.TagMapping;
+import com.github.tagstream.Element;
+import com.github.tagstream.ElementType;
 import com.github.tagstream.Tag;
-import com.github.tagstream.api.Element;
-import com.github.tagstream.api.ElementType;
 
 public class UnusualHtmlTest {
 

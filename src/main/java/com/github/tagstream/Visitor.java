@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-package com.github.tagstream.api;
+package com.github.tagstream;
 
 public interface Visitor<T> {
 

@@ -23,8 +23,8 @@ import org.xml.sax.ext.Attributes2Impl;
 import org.xml.sax.ext.DefaultHandler2;
 import org.xml.sax.ext.LexicalHandler;
 
-import com.github.tagstream.api.AttrValue;
-import com.github.tagstream.api.Element;
+import com.github.tagstream.AttrValue;
+import com.github.tagstream.Element;
 
 public class HtmlSAXSupport implements Consumer<Element> {
     

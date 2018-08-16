@@ -16,9 +16,9 @@ package com.github.tagstream.util;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import com.github.tagstream.api.AttrValue;
-import com.github.tagstream.api.Element;
-import com.github.tagstream.api.impl.StartTag;
+import com.github.tagstream.AttrValue;
+import com.github.tagstream.Element;
+import com.github.tagstream.impl.tag.StartTag;
 
 public class HtmlStreams {
     

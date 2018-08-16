@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 options { 
-  IGNORE_CASE = true; 
+  IGNORE_CASE = true;
   STATIC = false;
   UNICODE_INPUT = true;
 } 
@@ -21,8 +21,8 @@ options {
 PARSER_BEGIN(TagParser)
 package com.github.tagstream.impl;
 
-import com.github.tagstream.api.*;
-import com.github.tagstream.api.impl.*;
+import com.github.tagstream.*;
+import com.github.tagstream.impl.tag.*;
 import java.util.*;
 
 public class TagParser {

@@ -1,7 +1,13 @@
 [![Build Status](https://travis-ci.org/JEBailey/tagstream.svg?branch=master)](https://travis-ci.org/JEBailey/tagstream) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0)
 
 # TagStream
-Module to provide a fast, HTML5/XML tokenzier. TagStream takes an InputStream and tokenizes into a Tag or Text element.
+Module to provide a fast, HTML5/XML tokenzier. TagStream takes an InputStream and tokenizes into a Tag or Text element which can be used for inspection or transformation by leveraging Java's Stream API.
+
+This provides:
+* Reduced memory footprint by eliminating the virtual dom
+* Event based/pull processing of the source
+* Enables stream processing from an input to an output stream
+
 
 ## Using TagStream 
 There are multiple ways which provides access to the processing of an HTML/XML source. 

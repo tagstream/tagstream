@@ -20,8 +20,6 @@ import java.util.Spliterators;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
-import com.github.tagstream.api.Element;
-
 /**
  * Provides access to a stream of elements from a XML/HTML source
  * 
