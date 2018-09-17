@@ -16,7 +16,9 @@ package com.github.tagstream;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
 
+import org.osgi.annotation.versioning.ProviderType;
 
+@ProviderType
 public class AttrValue implements CharSequence {
 
     Predicate<String> nonQuotable = Pattern.compile("^[a-zA-Z][-_a-zA-Z0-9\\u00A0-\\u10FFFF]*$").asPredicate();
@@ -30,6 +32,10 @@ public class AttrValue implements CharSequence {
         this.value = value;
     }
 
+    public void setValue(String value) {
+        this.value = value;
+    }
+    
     public String getValue() {
         return value;
     }

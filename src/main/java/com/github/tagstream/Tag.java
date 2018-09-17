@@ -20,10 +20,13 @@ import java.util.Spliterators;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
+import org.osgi.annotation.versioning.ProviderType;
+
 /**
  * Provides access to a stream of elements from a XML/HTML source
  * 
  */
+@ProviderType
 public class Tag {
 
     private Tag() {

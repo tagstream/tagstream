@@ -15,6 +15,9 @@ package com.github.tagstream;
 
 import java.util.Map;
 
+import org.osgi.annotation.versioning.ProviderType;
+
+@ProviderType
 public interface Element {
     /**
      * Retrieve the associated ElementType

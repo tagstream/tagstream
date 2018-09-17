@@ -13,6 +13,9 @@
  */
 package com.github.tagstream;
 
+import org.osgi.annotation.versioning.ProviderType;
+
+@ProviderType
 public enum ElementType {
     EOF, START_TAG, COMMENT, END_TAG, TEXT, DOCTYPE;
 }

@@ -20,6 +20,8 @@ import java.util.function.BiConsumer;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
+import org.osgi.annotation.versioning.ProviderType;
+
 /**
  * Utility class that allows you to define a flatMap process in the form of a
  * BiConsumer<Element,TagMapping> lambda.
@@ -29,6 +31,7 @@ import java.util.stream.Stream;
  * there is a need to add or remove elements
  *
  */
+@ProviderType
 public class TagMapping {
 
     private List<Element> list = new ArrayList<>();

@@ -17,9 +17,12 @@ import java.io.InputStream;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+import org.osgi.annotation.versioning.ProviderType;
+
 import com.github.tagstream.impl.TagParser;
 import com.github.tagstream.impl.ParseException;
 
+@ProviderType
 public class TagIterator implements Iterator<Element> {
 
     private Element current;

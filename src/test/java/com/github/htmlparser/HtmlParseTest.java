@@ -61,7 +61,7 @@ public class HtmlParseTest {
 
     @Test
     public void docParseAllTestToString() throws Exception {
-        stream.map(HtmlStreams.TO_HTML).forEach(System.out::print);
+        stream.map(HtmlStreams.TO_HTML).count();
     }
 
     @Test
@@ -70,7 +70,7 @@ public class HtmlParseTest {
             @Override
             public void startElement(String uri, String localName, String qName, Attributes attributes)
                     throws SAXException {
-                System.out.println(localName);
+                //System.out.println(localName);
             }
 
         }, new DefaultHandler2());
@@ -81,7 +81,7 @@ public class HtmlParseTest {
     public void docParseTagTest3() throws Exception {
         long count = stream.flatMap(TagMapping.map((element, process) -> {
             if (element.containsAttribute("href")) {
-                System.out.println(element.getAttributeValue("href"));
+                //System.out.println(element.getAttributeValue("href"));
                 process.next(element);
             }
         })).count();
@@ -112,7 +112,7 @@ public class HtmlParseTest {
 
     @Test
     public void convertLinkAndPrintTest() throws Exception {
-        stream.flatMap(CONVERT_LINKS).map(HtmlStreams.TO_HTML).forEach(System.out::print);
+        //stream.flatMap(CONVERT_LINKS).map(HtmlStreams.TO_HTML).forEach(System.out::print);
     }
 
 }
